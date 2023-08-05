@@ -20,4 +20,7 @@ public class CardUtils
         int suiteValue = (value % 4);
         return (CardElement.Suite)suiteValue;
     }
+    public static bool IsHigherThan(CardElement element, CardElement comparator) {
+        return element.CardValue > comparator.CardValue;
+    }
 }
