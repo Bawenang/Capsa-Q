@@ -1,0 +1,16 @@
+{
+    "name": "CardsValidation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3681e422a432945d7bba7003028bd5b9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
