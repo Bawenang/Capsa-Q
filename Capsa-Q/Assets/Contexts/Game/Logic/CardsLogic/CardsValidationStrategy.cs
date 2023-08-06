@@ -63,11 +63,7 @@ public class StraightFlushValidationStrategy: CardsValidationStrategy {
 
     private void SortCards(CardElement[] cards) {
         sortedCards = cards;
-        Array.Sort(sortedCards, 
-                   new Comparison<CardElement>((card1, card2) => 
-                        card2.CardValue.CompareTo(card1.CardValue)
-                   )
-        );
+        CardUtils.SortCardsDescending(ref sortedCards);
     }
 
     private bool IsStraight(CardElement[] sortedCards) {

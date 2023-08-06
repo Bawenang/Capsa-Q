@@ -20,4 +20,12 @@ public class CardUtils
         int suiteValue = (value % 4);
         return (CardElement.Suite)suiteValue;
     }
+
+    public static void SortCardsDescending(ref CardElement[] sortedCards) {
+        Array.Sort(sortedCards, 
+                   new Comparison<CardElement>((card1, card2) => 
+                        card2.CardValue.CompareTo(card1.CardValue)
+                   )
+        );
+    }
 }

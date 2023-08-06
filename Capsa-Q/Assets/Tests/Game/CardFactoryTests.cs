@@ -4,11 +4,11 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class CardConstructorTests
+public class CardFactoryTests
 {
     // A Test behaves as an ordinary method
     [Test]
-    public void TestCardConstructor_FromNumberAndSuite()
+    public void TestCardElementFactory_FromNumberAndSuite()
     {
         // Use the Assert class to test conditions
         Assert.AreEqual(0, GetValue(CardElement.Number.Three, CardElement.Suite.Diamond));
@@ -66,7 +66,7 @@ public class CardConstructorTests
     }
 
     [Test]
-    public void TestCardConstructor_FromValue()
+    public void TestCardElementFactory_FromValue()
     {
         // Use the Assert class to test conditions
         Assert.AreEqual(CardElement.Number.Three, GetNumber(0));
@@ -176,7 +176,7 @@ public class CardConstructorTests
     }
 
     [Test]
-    public void TestCardConstructor_FromInvalids()
+    public void TestCardElementFactory_FromInvalids()
     {
         // Use the Assert class to test conditions
         Assert.AreEqual(CardElement.Number.Unknown, GetNumber(-1));
@@ -190,18 +190,181 @@ public class CardConstructorTests
         Assert.AreEqual(-1, GetValue(CardElement.Number.Unknown, CardElement.Suite.Unknown));
     }
 
+    [Test]
+    public void TestCardSetFactory_FromFiveCards() {
+        CardElement[] validElementStraight = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+            CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Four, CardElement.Suite.Heart),
+            CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Club),
+            CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Spade),
+        };
+        CardSet validSetStraight = CardSetFactory.Create(validElementStraight);
+        AssertValidCardSet(validSetStraight, 
+                           CardsType.Straight,
+                           CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Spade));
+
+        CardElement[] validElementFlush = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+            CardElementFactory.Create(CardElement.Number.Two, CardElement.Suite.Diamond),
+            CardElementFactory.Create(CardElement.Number.Ace, CardElement.Suite.Diamond),
+            CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Diamond),
+            CardElementFactory.Create(CardElement.Number.King, CardElement.Suite.Diamond),
+        };
+        CardSet validSetFlush = CardSetFactory.Create(validElementFlush);
+        AssertValidCardSet(validSetFlush, 
+                           CardsType.Flush,
+                           CardElementFactory.Create(CardElement.Number.Two, CardElement.Suite.Diamond));
+
+        CardElement[] validElementStraightFlush = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+            CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Diamond),
+            CardElementFactory.Create(CardElement.Number.Four, CardElement.Suite.Diamond),
+            CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Diamond),
+            CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Diamond),
+        };
+        CardSet validSetStraightFlush = CardSetFactory.Create(validElementStraightFlush);
+        AssertValidCardSet(validSetStraightFlush, 
+                           CardsType.StraightFlush,
+                           CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Diamond));
+
+        CardElement[] validElementFullHouse = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Heart),
+            CardElementFactory.Create(CardElement.Number.Two, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Two, CardElement.Suite.Diamond),
+        };
+        CardSet validSetFullHouse = CardSetFactory.Create(validElementFullHouse);
+        AssertValidCardSet(validSetFullHouse, 
+                           CardsType.FullHouse,
+                           CardElementFactory.Create(CardElement.Number.Two, CardElement.Suite.Spade));
+
+        CardElement[] validElementQuads = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Heart),
+            CardElementFactory.Create(CardElement.Number.Two, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Club),
+        };
+        CardSet validSetQuads = CardSetFactory.Create(validElementQuads);
+        AssertValidCardSet(validSetQuads, 
+                           CardsType.Quads,
+                           CardElementFactory.Create(CardElement.Number.Two, CardElement.Suite.Spade));
+    }
+
+    [Test]
+    public void TestCardSetFactory_FromThreeCards() {
+        CardElement[] validElement = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Heart)
+        };
+        CardSet validSet = CardSetFactory.Create(validElement);
+        AssertValidCardSet(validSet, 
+                           CardsType.Triplets,
+                           CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade));
+    }
+
+    [Test]
+    public void TestCardSetFactory_FromTwoCards() {
+        CardElement[] validElement = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade)
+        };
+        CardSet validSet = CardSetFactory.Create(validElement);
+        AssertValidCardSet(validSet, 
+                           CardsType.Pairs,
+                           CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade));
+    }
+
+    [Test]
+    public void TestCardSetFactory_FromOneCards() {
+        CardElement[] validElement = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade)
+        };
+        CardSet validSet = CardSetFactory.Create(validElement);
+        AssertValidCardSet(validSet, 
+                           CardsType.Singular,
+                           CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade));
+    }
+
+    [Test]
+    public void TestCardSetFactory_FromInvalids() {
+        CardElement[] invalidElement1 = {};
+        CardSet invalidSet1 = CardSetFactory.Create(invalidElement1);
+        AssertInvalidCardSet(invalidSet1);
+
+        CardElement[] invalidElement2 = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+            CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Spade)
+        };
+        CardSet invalidSet2 = CardSetFactory.Create(invalidElement2);
+        AssertInvalidCardSet(invalidSet2);
+
+        CardElement[] invalidElement3 = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+            CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Nine, CardElement.Suite.Heart)
+        };
+        CardSet invalidSet3 = CardSetFactory.Create(invalidElement3);
+        AssertInvalidCardSet(invalidSet3);
+
+        CardElement[] invalidElement4 = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade), 
+            CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Nine, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Spade)
+        };
+        CardSet invalidSet4 = CardSetFactory.Create(invalidElement4);
+        AssertInvalidCardSet(invalidSet4);
+
+        CardElement[] invalidElement5 = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade), 
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond),
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Club),
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Heart)
+        };
+        CardSet invalidSet5 = CardSetFactory.Create(invalidElement5);
+        AssertInvalidCardSet(invalidSet5);
+
+        CardElement[] invalidElement6 = {
+            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade), 
+            CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Diamond),
+            CardElementFactory.Create(CardElement.Number.Nine, CardElement.Suite.Club),
+            CardElementFactory.Create(CardElement.Number.Jack, CardElement.Suite.Heart),
+            CardElementFactory.Create(CardElement.Number.Queen, CardElement.Suite.Spade)
+        };
+        CardSet invalidSet6 = CardSetFactory.Create(invalidElement6);
+        AssertInvalidCardSet(invalidSet6);
+    }
+
     private int GetValue(CardElement.Number number, CardElement.Suite suite) {
-        var card = new CardElement(number, suite);
+        var card = CardElementFactory.Create(number, suite);
         return card.CardValue;
     }
 
     private CardElement.Number GetNumber(int value) {
-        var card = new CardElement(value);
+        var card = CardElementFactory.Create(value);
         return card.CardNumber;
     }
 
     private CardElement.Suite GetSuite(int value) {
-        var card = new CardElement(value);
+        var card = CardElementFactory.Create(value);
         return card.CardSuite;
+    }
+
+    private void AssertValidCardSet(CardSet actualSet, CardsType expectedType, CardElement expectedHighest) {
+        Assert.AreEqual(expectedType, actualSet.Type);
+        Assert.AreNotEqual(0, actualSet.Cards.Length);
+        Assert.AreEqual(expectedHighest.CardNumber, actualSet.HighestCard.CardNumber);
+        Assert.AreEqual(expectedHighest.CardSuite, actualSet.HighestCard.CardSuite);
+    }
+
+    private void AssertInvalidCardSet(CardSet actualSet) {
+        Assert.AreEqual(CardsType.Invalid, actualSet.Type);
+        Assert.AreEqual(0, actualSet.Cards.Length);
+        Assert.AreEqual(CardElement.Number.Unknown, actualSet.HighestCard.CardNumber);
+        Assert.AreEqual(CardElement.Suite.Unknown, actualSet.HighestCard.CardSuite);
     }
 }

@@ -8,4 +8,18 @@ public class CardsComparator
         return element.CardValue > comparator.CardValue;
     }
 
+    public static bool IsHigherThan(CardSet cardSet, CardSet comparator) {
+        int toCompareTypeRank = (int)cardSet.Type;
+        int comparatorTypeRank = (int)comparator.Type;
+
+        if(toCompareTypeRank > comparatorTypeRank) {
+            return true;
+        } 
+
+        if(toCompareTypeRank == comparatorTypeRank) {
+            return cardSet.HighestCard.CardValue > comparator.HighestCard.CardValue;
+        }
+
+        return false;
+    }
 }
