@@ -13,8 +13,8 @@ public class CardComparisonTests
         // Use the Assert class to test conditions
         CardElement higherElement = new CardElement(CardElement.Number.Two, CardElement.Suite.Spade);
         CardElement lowerElement = new CardElement(CardElement.Number.Three, CardElement.Suite.Diamond);
-        Assert.True(CardUtils.IsHigherThan(higherElement, lowerElement));
-        Assert.False(CardUtils.IsHigherThan(lowerElement, higherElement));
-        Assert.False(CardUtils.IsHigherThan(higherElement, higherElement));
+        Assert.True(CardsComparator.IsHigherThan(higherElement, lowerElement));
+        Assert.False(CardsComparator.IsHigherThan(lowerElement, higherElement));
+        Assert.False(CardsComparator.IsHigherThan(higherElement, higherElement));
     }
 }
