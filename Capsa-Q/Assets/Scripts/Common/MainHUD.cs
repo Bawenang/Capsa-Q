@@ -30,6 +30,15 @@ public class MainHUD : MonoBehaviour
         StartCoroutine(FadeOutOfSceneFinished());
     }
 
+    public void FadeOutIn(OnFinishFadingOutOfScene completion = null) {
+        FadeOutOfScene(FadeInAfterwards);
+        onFinishFadingOutOfScene += completion;
+    }
+
+    private void FadeInAfterwards() {
+        FadeIntoScene();
+    }
+
     private IEnumerator FadeIntoSceneFinished() {
         yield return new WaitForSeconds(1.2f);
         fadingImageAnimator.gameObject.SetActive(false);

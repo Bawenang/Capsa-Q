@@ -6,6 +6,7 @@ public class MainmenuSceneController : MonoBehaviour
 {
     [SerializeField] private MainHUD mainHUD;
     [SerializeField] private OpeningMenuView openingMenuView;
+    [SerializeField] private CharacterSelectionView characterSelectionView;
 
     private void OnEnable() {
         openingMenuView.onPlayButton += SelectCharacter;
@@ -18,7 +19,8 @@ public class MainmenuSceneController : MonoBehaviour
 
     void Awake()
     {
-        
+        openingMenuView.gameObject.SetActive(true);
+        characterSelectionView.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -34,6 +36,11 @@ public class MainmenuSceneController : MonoBehaviour
     }
 
     private void SelectCharacter() {
-        mainHUD.FadeIntoScene();
+        mainHUD.FadeOutIn(ShowCharacterSelection);
+    }
+
+    private void ShowCharacterSelection() {
+        openingMenuView.gameObject.SetActive(false);
+        characterSelectionView.gameObject.SetActive(true);
     }
 }

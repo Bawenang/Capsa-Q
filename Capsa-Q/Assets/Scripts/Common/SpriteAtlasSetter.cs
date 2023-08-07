@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-[ExecuteInEditMode]
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpriteAtlasSetter : MonoBehaviour
 {
