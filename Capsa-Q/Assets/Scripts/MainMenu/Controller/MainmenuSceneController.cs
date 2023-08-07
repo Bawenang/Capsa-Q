@@ -7,6 +7,7 @@ public class MainmenuSceneController : MonoBehaviour
     [SerializeField] private MainHUD mainHUD;
     [SerializeField] private OpeningMenuView openingMenuView;
     [SerializeField] private CharacterSelectionView characterSelectionView;
+    [SerializeField] private CharacterData[] characters;
 
     private void OnEnable() {
         openingMenuView.onPlayButton += SelectCharacter;
@@ -21,6 +22,7 @@ public class MainmenuSceneController : MonoBehaviour
     {
         openingMenuView.gameObject.SetActive(true);
         characterSelectionView.gameObject.SetActive(false);
+        characterSelectionView.Populate(characters);
     }
 
     // Start is called before the first frame update

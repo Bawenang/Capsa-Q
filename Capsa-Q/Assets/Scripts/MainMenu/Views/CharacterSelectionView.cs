@@ -8,11 +8,10 @@ public class CharacterSelectionView : MonoBehaviour
     [SerializeField] private Button beginButton;
     [SerializeField] private CharacterButton[] charButtons;
 
-    private int selectedCharId = 0;
-
+    private CharacterData[] characters = { };
+    private CharacterData selectedChar = null;
     public delegate void OnBeginButton();
     public event OnBeginButton onBeginButton;
-
     void OnEnable()
     {
         for(int i = 0; i < charButtons.Length; i++) {
@@ -27,24 +26,19 @@ public class CharacterSelectionView : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
-
-        for(int i = 0; i < charButtons.Length; i++) {
-            charButtons[i].Populate(null, "NAME", i);
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         charButtons[0].Select();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Populate(CharacterData[] characters) {
+        this.characters = characters;
+        for(int i = 0; i < charButtons.Length; i++) {
+            charButtons[i].Populate(characters[i].GetSprite(CharacterData.SpriteState.Idle), 
+                                    characters[i].charName, 
+                                    i);
+        }
     }
 
     private void BeginGame() {
@@ -53,7 +47,6 @@ public class CharacterSelectionView : MonoBehaviour
 
     private void CharSelected(int index) 
     {
-        Debug.Log(">>>>> Selected index = " + index);
-        selectedCharId = index;
+        selectedChar = characters[index];
     }
 }
