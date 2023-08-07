@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Characters
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: d938d696bed214f8780813d09369343a, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 7e81cd02e8f544c7ca25df44fef0c9b9, type: 3}
+  - {fileID: 21300000, guid: f7f6c1432e05d4847a5e9b10893dc626, type: 3}
+  - {fileID: 21300000, guid: ae32e9b32377a4447852d148c65b3a60, type: 3}
+  - {fileID: 21300000, guid: 0d5271f38231e4a70a50fd49163a5bd5, type: 3}
+  - {fileID: 21300000, guid: 5db30615458f04066a42569d53e626a4, type: 3}
+  - {fileID: 21300000, guid: 4223de46720994fdc9faaa0e3e29d457, type: 3}
+  - {fileID: 21300000, guid: a907e5763c32840509ace90002076b20, type: 3}
+  - {fileID: 21300000, guid: c3e121b68f3b544128fb3687a0bc4f35, type: 3}
+  - {fileID: 21300000, guid: 09f0bb378c3614c0baa7073909bb030d, type: 3}
+  - {fileID: 21300000, guid: c7ea59d9ad9304ac39a44fcbbf562b98, type: 3}
+  - {fileID: 21300000, guid: ae28d95a4f89c424cb15150d4df25b2a, type: 3}
+  - {fileID: 21300000, guid: d66c51ba9f77945b1bb4ff7e350769f3, type: 3}
+  - {fileID: 21300000, guid: debcb3caa4db848e6a88b8f96bcc00e2, type: 3}
+  - {fileID: 21300000, guid: fed9a84bcc58e4d2c9eb38a556c229dc, type: 3}
+  - {fileID: 21300000, guid: c083c76bc9ea14e709f0e25c96971044, type: 3}
+  - {fileID: 21300000, guid: a476cb6b5ffab4a2a929a5e1f867260c, type: 3}
+  - {fileID: 21300000, guid: 1ae7ec2e51ef54053b7b765d802d7ef3, type: 3}
+  - {fileID: 21300000, guid: c6f87d3e246a34f1d89b6a162f23cd9f, type: 3}
+  - {fileID: 21300000, guid: f7f1d90f62f314114a901a9945ac0528, type: 3}
+  - {fileID: 21300000, guid: 769ddb2f7aee147f7bddbbc42cce8e3a, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Dexter_play
+  - Maria_idle
+  - Yuki_lose
+  - Yuki_win
+  - Eve_win
+  - Eve_lose
+  - Stephen_idle
+  - Dexter_lose
+  - Eve_play
+  - Stephen_lose
+  - Yuki_idle
+  - Maria_lose
+  - Maria_win
+  - Dexter_idle
+  - Eve_idle
+  - Stephen_play
+  - Maria_play
+  - Dexter_win
+  - Yuki_play
+  - Stephen_win
+  m_RenderDataMap: {}
+  m_Tag: Characters
+  m_IsVariant: 0
