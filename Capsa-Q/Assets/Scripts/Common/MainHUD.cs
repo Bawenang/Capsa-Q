@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FadingController : MonoBehaviour
+public class MainHUD : MonoBehaviour
 {
     [SerializeField] private Image fadingImage;
     [SerializeField] private Animator fadingImageAnimator;
