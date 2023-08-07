@@ -9,7 +9,7 @@ public class OpeningMenuView : MonoBehaviour
 
     void Awake() 
     {
-        playButton.onClick += 
+        playButton.onClick.AddListener(OnPlayButton);
     }
 
     // Start is called before the first frame update
