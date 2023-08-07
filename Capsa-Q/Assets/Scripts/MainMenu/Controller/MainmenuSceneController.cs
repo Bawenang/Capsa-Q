@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainmenuSceneController : MonoBehaviour
 {
@@ -11,38 +12,46 @@ public class MainmenuSceneController : MonoBehaviour
 
     private void OnEnable() {
         openingMenuView.onPlayButton += SelectCharacter;
+        characterSelectionView.onBeginButton += BeginGame;
     }
 
     private void OnDisable()
     {
         openingMenuView.onPlayButton -= SelectCharacter;
+        characterSelectionView.onBeginButton -= BeginGame;
     }
 
     void Awake()
     {
-        openingMenuView.gameObject.SetActive(true);
-        characterSelectionView.gameObject.SetActive(false);
         characterSelectionView.Populate(characters);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        openingMenuView.gameObject.SetActive(true);
+        characterSelectionView.gameObject.SetActive(false);
         mainHUD.FadeIntoScene();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SelectCharacter() 
     {
-        
-    }
-
-    private void SelectCharacter() {
         mainHUD.FadeOutIn(ShowCharacterSelection);
     }
 
-    private void ShowCharacterSelection() {
+    private void ShowCharacterSelection() 
+    {
         openingMenuView.gameObject.SetActive(false);
         characterSelectionView.gameObject.SetActive(true);
+    }
+
+    private void BeginGame(CharacterData selectedChar)
+    {
+        mainHUD.FadeOutOfScene(LoadGameScene);
+    }
+
+    private void LoadGameScene() 
+    {
+        SceneManager.LoadScene(1);
     }
 }

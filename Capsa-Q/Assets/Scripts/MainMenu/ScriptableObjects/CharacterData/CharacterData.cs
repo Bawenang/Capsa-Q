@@ -6,12 +6,6 @@ using UnityEngine.U2D;
 [CreateAssetMenu(fileName = "CharacterData", menuName = "ScriptableObjects/CharacterData", order = 1)]
 public class CharacterData : ScriptableObject
 {
-    public enum SpriteState {
-        Idle,
-        Play,
-        Win,
-        Lose
-    }
     public string charName;
 
     public string GetSpriteName(SpriteState state) {
