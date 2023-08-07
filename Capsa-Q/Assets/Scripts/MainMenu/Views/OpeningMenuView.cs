@@ -7,10 +7,12 @@ public class OpeningMenuView : MonoBehaviour
 {
     [SerializeField] private Button playButton;
 
+    public delegate void OnPlayButton();
+    public event OnPlayButton onPlayButton;
+
     void Awake() 
     {
-        playButton.onClick.AddListener(OnPlayButton);
-
+        playButton.onClick.AddListener(OnPlay);
     }
 
     // Start is called before the first frame update
@@ -24,8 +26,8 @@ public class OpeningMenuView : MonoBehaviour
         
     }
 
-    private void OnPlayButton() 
+    private void OnPlay() 
     {
-        
+        if(onPlayButton != null) onPlayButton();
     }
 }
