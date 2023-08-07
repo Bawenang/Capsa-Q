@@ -40,6 +40,7 @@ public class AtlasSpriteStore : MonoBehaviour
 
     public Sprite GetSprite(string key) 
     {
+        Debug.Log("GetSprite " + key);
         if(spriteDict.ContainsKey(key)) {
             return spriteDict[key];
         } else {
@@ -63,6 +64,7 @@ public class AtlasSpriteStore : MonoBehaviour
             Sprite sprite = atlasList[i].GetSprite(key);
             if(sprite != null) return sprite;
         }
+        Debug.Log("GetFromAtlasList return null");
 
         return null;
     }
