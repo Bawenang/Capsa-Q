@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 47332857}
   - component: {fileID: 47332856}
   - component: {fileID: 47332858}
+  - component: {fileID: 47332859}
   m_Layer: 5
   m_Name: Eve
   m_TagString: Untagged
@@ -444,6 +445,7 @@ RectTransform:
   m_Children:
   - {fileID: 1966097747}
   - {fileID: 2089095994}
+  - {fileID: 775775095}
   m_Father: {fileID: 1084005867}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -532,12 +534,27 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 47332856}
   toggleTransition: 1
-  graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  graphic: {fileID: 47332856}
+  m_Group: {fileID: 1084005868}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &47332859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47332854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ab42acf851848efad3417f4d94d8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle: {fileID: 47332858}
+  photoImage: {fileID: 968228543}
+  nameText: {fileID: 2089095995}
 --- !u!1 &97333616
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +567,7 @@ GameObject:
   - component: {fileID: 97333619}
   - component: {fileID: 97333618}
   - component: {fileID: 97333620}
+  - component: {fileID: 97333621}
   m_Layer: 5
   m_Name: Dexter
   m_TagString: Untagged
@@ -659,12 +677,27 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 97333618}
   toggleTransition: 1
-  graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  graphic: {fileID: 97333618}
+  m_Group: {fileID: 1084005868}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &97333621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97333616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ab42acf851848efad3417f4d94d8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle: {fileID: 97333620}
+  photoImage: {fileID: 40916584}
+  nameText: {fileID: 738464244}
 --- !u!1 &103566182
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +845,7 @@ GameObject:
   - component: {fileID: 138942244}
   - component: {fileID: 138942243}
   - component: {fileID: 138942245}
+  - component: {fileID: 138942246}
   m_Layer: 5
   m_Name: Stephen
   m_TagString: Untagged
@@ -921,12 +955,27 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 138942243}
   toggleTransition: 1
-  graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  graphic: {fileID: 138942243}
+  m_Group: {fileID: 1084005868}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &138942246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138942241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ab42acf851848efad3417f4d94d8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle: {fileID: 138942245}
+  photoImage: {fileID: 489204635}
+  nameText: {fileID: 8731220}
 --- !u!1 &156956720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,6 +2010,82 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &775775094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 775775095}
+  - component: {fileID: 775775097}
+  - component: {fileID: 775775096}
+  m_Layer: 5
+  m_Name: OnImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &775775095
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775775094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47332855}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &775775096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775775094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.93333334, g: 0.6117647, b: 0.2, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &775775097
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775775094}
+  m_CullTransparentMesh: 1
 --- !u!1 &781099216
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,6 +2636,7 @@ GameObject:
   - component: {fileID: 989463817}
   - component: {fileID: 989463816}
   - component: {fileID: 989463818}
+  - component: {fileID: 989463819}
   m_Layer: 5
   m_Name: Yuki
   m_TagString: Untagged
@@ -2620,12 +2746,27 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 989463816}
   toggleTransition: 1
-  graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  graphic: {fileID: 989463816}
+  m_Group: {fileID: 1084005868}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &989463819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989463814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ab42acf851848efad3417f4d94d8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle: {fileID: 989463818}
+  photoImage: {fileID: 2031806494}
+  nameText: {fileID: 565640146}
 --- !u!1 &1030605605
 GameObject:
   m_ObjectHideFlags: 0
@@ -3318,6 +3459,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d6c408bacc44415a0f4326b08e91e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beginButton: {fileID: 1030605607}
+  charButtons:
+  - {fileID: 47332859}
+  - {fileID: 97333621}
+  - {fileID: 989463819}
+  - {fileID: 138942246}
+  - {fileID: 2078908481}
 --- !u!213 &1654435825
 Sprite:
   m_ObjectHideFlags: 0
@@ -3928,6 +4076,7 @@ GameObject:
   - component: {fileID: 2078908479}
   - component: {fileID: 2078908478}
   - component: {fileID: 2078908480}
+  - component: {fileID: 2078908481}
   m_Layer: 5
   m_Name: Maria
   m_TagString: Untagged
@@ -4037,12 +4186,27 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 2078908478}
   toggleTransition: 1
-  graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  graphic: {fileID: 2078908478}
+  m_Group: {fileID: 1084005868}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &2078908481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078908476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ab42acf851848efad3417f4d94d8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle: {fileID: 2078908480}
+  photoImage: {fileID: 1723818476}
+  nameText: {fileID: 1204259347}
 --- !u!1 &2089095993
 GameObject:
   m_ObjectHideFlags: 0
