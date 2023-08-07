@@ -10,6 +10,7 @@ public class SpriteAtlasSetter : MonoBehaviour
 
     void Awake()
     {
-        AtlasSpriteStore.Instance.GetSprite(spriteName);
+        var sprite = AtlasSpriteStore.Instance.GetSprite(spriteName);
+        GetComponent<SpriteRenderer>().sprite = sprite;
     }
 }
