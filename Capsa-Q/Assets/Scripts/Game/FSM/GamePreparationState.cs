@@ -6,20 +6,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "State", menuName = "ScriptableObjects/GamePreparationState", order = 2)]
 public class GamePreparationState : FSM.State
 {
-    public delegate void OnPopulateGame(GameRepository repository);
-    public event OnPopulateGame onPopulateGame;
-
     public class Properties 
     {
+        public MainGameView mainGameView;
+        public GameRepository repository;
         public CharacterData selectedCharacter;
         public CharacterData[] allCharacters;
-        public OnPopulateGame onPopulateGame;
     }
 
     private Properties properties;
     public override void CleanUp()
     {
-        onPopulateGame = null;
     }
 
     public override void Setup(object properties)
@@ -29,37 +26,38 @@ public class GamePreparationState : FSM.State
             Debug.LogError("Properties invalid! Should be of GamePreparationState.Properties type.");
             return;
         }
-
-        onPopulateGame += props.onPopulateGame;
         
         var aiCharacters = CreateAICharacterData(props.selectedCharacter, props.allCharacters);
         var shuffler = new CardShuffler();
         var dealtCards = shuffler.ShuffleAndDeal();
 
-        var selectedCharacter = new BasePlayer(PlayerType.Player1, 
-                                               props.selectedCharacter,
-                                               dealtCards[(int)PlayerType.Player1]);
+        var selectedPlayer = new BasePlayer(PlayerType.Player1, 
+                                            props.selectedCharacter,
+                                            dealtCards[(int)PlayerType.Player1]);
 
-        var aiCharacters1 = new BasePlayer(PlayerType.Player2,
-                                           aiCharacters[0],
-                                           dealtCards[(int)PlayerType.Player2]);
+        var aiPlayer1 = new BasePlayer(PlayerType.Player2,
+                                       aiCharacters[0],
+                                       dealtCards[(int)PlayerType.Player2]);
 
-        var aiCharacters2 = new BasePlayer(PlayerType.Player3,
-                                           aiCharacters[1],
-                                           dealtCards[(int)PlayerType.Player3]);
+        var aiPlayer2 = new BasePlayer(PlayerType.Player3,
+                                       aiCharacters[1],
+                                       dealtCards[(int)PlayerType.Player3]);
 
-        var aiCharacters3 = new BasePlayer(PlayerType.Player4,
-                                           aiCharacters[2],
-                                           dealtCards[(int)PlayerType.Player4]);
+        var aiPlayer3 = new BasePlayer(PlayerType.Player4,
+                                       aiCharacters[2],
+                                       dealtCards[(int)PlayerType.Player4]);
 
         var repository = new GameRepository();
 
-        repository.AddPlayer(PlayerType.Player1, selectedCharacter);
-        repository.AddPlayer(PlayerType.Player2, aiCharacters1);
-        repository.AddPlayer(PlayerType.Player3, aiCharacters2);
-        repository.AddPlayer(PlayerType.Player4, aiCharacters3);
+        repository.AddPlayer(PlayerType.Player1, selectedPlayer);
+        repository.AddPlayer(PlayerType.Player2, aiPlayer1);
+        repository.AddPlayer(PlayerType.Player3, aiPlayer2);
+        repository.AddPlayer(PlayerType.Player4, aiPlayer3);
 
-        if(onPopulateGame != null) onPopulateGame(repository);
+        props.mainGameView.InitiatePlayer(selectedPlayer);
+        props.mainGameView.InitiatePlayer(aiPlayer1);
+        props.mainGameView.InitiatePlayer(aiPlayer2);
+        props.mainGameView.InitiatePlayer(aiPlayer3);
     }
 
     protected override int CheckTransition()

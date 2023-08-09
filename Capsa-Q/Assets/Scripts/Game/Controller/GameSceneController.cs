@@ -10,16 +10,6 @@ public class GameSceneController : MonoBehaviour
     [SerializeField] private MainGameView mainGameView;
     [SerializeField] private GameStateController stateController;
 
-    void OnEnable()
-    {
-        stateController.onInitiatePlayer += InitiatePlayer;
-    }
-
-    void OnDisable()
-    {
-        stateController.onInitiatePlayer -= InitiatePlayer;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +17,7 @@ public class GameSceneController : MonoBehaviour
                     mockCharacter : GameSceneController.selectedCharacter;
         stateController.selectedCharacter = selectedCharacter;
         stateController.allCharacters = allCharacters;
+        stateController.mainGameView = mainGameView;
 
         stateController.StartManually();
     }
@@ -35,10 +26,5 @@ public class GameSceneController : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void InitiatePlayer(Player player)
-    {
-        mainGameView.InitiatePlayer(player);
     }
 }
