@@ -1,8 +1,7 @@
 {
-    "name": "Entities",
+    "name": "CharacterData",
     "rootNamespace": "",
     "references": [
-        "GUID:b286f0dff5ccd429d8b4eab5799a58d6",
         "GUID:1cd731c246b8b43029c844ae7b211e8c"
     ],
     "includePlatforms": [],
