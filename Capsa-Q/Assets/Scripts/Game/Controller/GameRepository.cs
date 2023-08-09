@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GameRepository: MonoBehaviour
+public class GameRepository
 {
-    public PlayerType lastPlaying;
+    public PlayerType lastPlaying = PlayerType.Unknown;
     public CardSet[] PlayedCards { get => playedCards.ToArray(); }
 
     private Dictionary<PlayerType, Player> players;

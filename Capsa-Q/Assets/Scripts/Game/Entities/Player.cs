@@ -4,10 +4,11 @@ using UnityEngine;
 
 public enum PlayerType 
 {
-    Player1,
-    Player2,
-    Player3,
-    Player4
+    Unknown = -1,
+    Player1 = 0,
+    Player2 = 1,
+    Player3 = 2,
+    Player4 = 3
 }
 
 public interface Player
@@ -21,7 +22,7 @@ public interface Player
     List<CardElement> Cards { get; }
 }
 
-public abstract class BasePlayer: Player
+public class BasePlayer: Player
 {
     public PlayerType Type { get => type; }
     public string CharName { get => charName; }
