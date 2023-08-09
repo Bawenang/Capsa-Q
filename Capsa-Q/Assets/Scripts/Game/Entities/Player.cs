@@ -2,8 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerType 
+{
+    Player1,
+    Player2,
+    Player3,
+    Player4
+}
+
 public interface Player
 {
+    PlayerType Type { get; }
     string CharName { get; }
     Sprite IdleSprite { get; }
     Sprite PlaySprite { get; }
@@ -14,6 +23,7 @@ public interface Player
 
 public abstract class BasePlayer: Player
 {
+    public PlayerType Type { get => type; }
     public string CharName { get => charName; }
     public Sprite IdleSprite { get => sprites[SpriteState.Idle]; }
     public Sprite PlaySprite { get => sprites[SpriteState.Play]; }
@@ -21,11 +31,13 @@ public abstract class BasePlayer: Player
     public Sprite LoseSprite { get => sprites[SpriteState.Lose]; }
     public List<CardElement> Cards { get => cards; }
 
+    private PlayerType type;
     private string charName;
     private Dictionary<SpriteState, Sprite> sprites = new Dictionary<SpriteState, Sprite>();
     private List<CardElement> cards = new List<CardElement>();
 
-    public BasePlayer(CharacterData character, CardElement[] cards) {
+    public BasePlayer(PlayerType type, CharacterData character, CardElement[] cards) {
+        this.type = type;
         sprites.Add(SpriteState.Idle, character.GetSprite(SpriteState.Idle));
         sprites.Add(SpriteState.Play, character.GetSprite(SpriteState.Play));
         sprites.Add(SpriteState.Win, character.GetSprite(SpriteState.Win));
