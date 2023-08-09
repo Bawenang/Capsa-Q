@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "State", menuName = "ScriptableObjects/GamePreparationState", order = 2)]
+[CreateAssetMenu(fileName = "State", menuName = "ScriptableObjects/GamePreparationState", order = 3)]
 public class GamePreparationState : FSM.State
 {
     public class Properties 
