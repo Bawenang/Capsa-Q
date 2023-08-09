@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainGameView : MonoBehaviour
 {
     [SerializeField] private CharacterInGame[] characters;
+    [SerializeField] private GameObject[] cardContainers;
     // Start is called before the first frame update
     void Start()
     {
