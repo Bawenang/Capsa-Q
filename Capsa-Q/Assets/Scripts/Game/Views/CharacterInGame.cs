@@ -40,4 +40,14 @@ public class CharacterInGame : MonoBehaviour
         photoImage.sprite = sprites[(int)SpriteState.Idle];
         nameText.text = character.charName;
     }
+
+    public void ChangePhoto(Sprite sprite)
+    {
+        photoImage.sprite = sprite;
+    }
+
+    public void ChangeName(string name)
+    {
+        nameText.text = name;
+    }
 }

@@ -19,13 +19,18 @@ public class CardElementFactory {
 }
 
 public class CardSetFactory {
+    private static CardSet Invalid = CreateInvalidImpl();
     public static CardSet Create(CardElement[] fromCards) {
         CardsType type = CardsValidator.Instance.ValidateType(fromCards);
         if(type == CardsType.Invalid) return CreateInvalid();
         else return CreateImpl(fromCards, type);
     }
 
-    private static CardSet CreateInvalid() {
+    public static CardSet CreateInvalid() {
+        return Invalid;
+    }
+
+    private static CardSet CreateInvalidImpl() {
         CardElement invalidCard = CardElementFactory.Create(CardElement.Number.Unknown, CardElement.Suite.Unknown);
         CardSet invalidSet = new CardSet(CardsType.Invalid,
                                          Array.Empty<CardElement>(),

@@ -8,13 +8,27 @@ public class GameSceneController : MonoBehaviour
     [SerializeField] private CharacterData mockCharacter;
     [SerializeField] private CharacterData[] allCharacters;
     [SerializeField] private MainGameView mainGameView;
+    [SerializeField] private GameStateController stateController;
+
+    void OnEnable()
+    {
+        stateController.onInitiatePlayer += InitiatePlayer;
+    }
+
+    void OnDisable()
+    {
+        stateController.onInitiatePlayer -= InitiatePlayer;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         var selectedCharacter = (GameSceneController.selectedCharacter == null) ? 
                     mockCharacter : GameSceneController.selectedCharacter;
-        var aiPlayers = CreateAICharacterData(selectedCharacter);
-        mainGameView.Populate(selectedCharacter, aiPlayers);
+        stateController.selectedCharacter = selectedCharacter;
+        stateController.allCharacters = allCharacters;
+
+        stateController.StartManually();
     }
 
     // Update is called once per frame
@@ -23,26 +37,8 @@ public class GameSceneController : MonoBehaviour
         
     }
 
-    private CharacterData[] CreateAICharacterData(CharacterData exceptPlayer) 
+    private void InitiatePlayer(Player player)
     {
-        List<CharacterData> charList = new List<CharacterData>(allCharacters);
-        charList.RemoveAll(character => character.charName == exceptPlayer.charName);
-        return Shuffle(charList);
-    }
-
-    private static CharacterData[] Shuffle(List<CharacterData> charList)
-    {
-        System.Random r = new System.Random();
-        
-        for (int n = charList.Count - 1; n > 0; --n)
-        {
-            int k = r.Next(n + 1);
-
-            CharacterData temp = charList[n];
-            charList[n] = charList[k];
-            charList[k] = temp;
-        }
-
-        return charList.ToArray();
+        mainGameView.InitiatePlayer(player);
     }
 }

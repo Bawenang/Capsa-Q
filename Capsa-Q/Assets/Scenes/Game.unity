@@ -1196,6 +1196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 921861508}
   - component: {fileID: 921861509}
+  - component: {fileID: 921861510}
   m_Layer: 0
   m_Name: GameSceneController
   m_TagString: Untagged
@@ -1238,6 +1239,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e3862a7fb26f642f3aa5dee5a599b17f, type: 2}
   - {fileID: 11400000, guid: 1bc762dcc2922458aa19ad61cd97d571, type: 2}
   mainGameView: {fileID: 636875722}
+  stateController: {fileID: 921861510}
+--- !u!114 &921861510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921861507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b10461b0e5774f7faa9cc0476373288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingState: {fileID: 11400000, guid: b01c39815a8654585908577e36c92c4b, type: 2}
+  startImmediately: 0
+  selectedCharacter: {fileID: 0}
+  allCharacters: []
 --- !u!1001 &930130997
 PrefabInstance:
   m_ObjectHideFlags: 0

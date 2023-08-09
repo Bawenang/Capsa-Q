@@ -25,4 +25,10 @@ public class MainGameView : MonoBehaviour
         }
     }
 
+    public void InitiatePlayer(Player player)
+    {
+        var character = characters[(int)player.Type];
+        character.ChangePhoto(player.IdleSprite);
+        character.ChangeName(player.CharName);
+    }
 }

@@ -8,8 +8,8 @@ public class GameRepository
     public PlayerType lastPlaying = PlayerType.Unknown;
     public CardSet[] PlayedCards { get => playedCards.ToArray(); }
 
-    private Dictionary<PlayerType, Player> players;
-    private List<CardSet> playedCards;
+    private Dictionary<PlayerType, Player> players = new Dictionary<PlayerType, Player>();
+    private List<CardSet> playedCards = new List<CardSet>();
 
     public Player GetPlayer(PlayerType type) 
     {
@@ -27,6 +27,7 @@ public class GameRepository
 
     public CardSet GetTopPlayedCards() 
     {
+        if(playedCards.Count == 0) return CardSetFactory.CreateInvalid();
         return playedCards.Last();
     }
 
