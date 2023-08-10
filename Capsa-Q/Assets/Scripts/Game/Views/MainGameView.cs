@@ -6,17 +6,6 @@ public class MainGameView : MonoBehaviour
 {
     [SerializeField] private CharacterInGame[] characters;
     [SerializeField] private CardController[] cardControllers;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Populate(CharacterData player, CharacterData[] aiPlayer)
     {
@@ -36,5 +25,11 @@ public class MainGameView : MonoBehaviour
         var cardDistance = cardController.isControllable ? 0.5f : 0.2f;
         var scaleFactor = cardController.isControllable ? 1.0f : 0.5f;
         cardController.Populate(player.Cards.ToArray(), cardDistance, scaleFactor);
+    }
+
+    public void ActivatePlayer(PlayerType playerType, bool isPlayerTurn)
+    {
+        var character = characters[(int)playerType];
+        character.IsMyTurn = isPlayerTurn;
     }
 }

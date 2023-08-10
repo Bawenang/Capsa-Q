@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameStateController : FSM.StateController
 {
-    private GameRepository repository;
+    private GameRepository repository = new GameRepository();
     public MainGameView mainGameView;
     public CharacterData selectedCharacter;
     public CharacterData[] allCharacters;
@@ -17,6 +17,11 @@ public class GameStateController : FSM.StateController
             props.repository = repository;
             props.selectedCharacter = selectedCharacter;
             props.allCharacters = allCharacters;
+            state.Setup(props);
+        } else if(state is PlayerTurnState) {
+            var props = new PlayerTurnState.Properties();
+            props.mainGameView = mainGameView;
+            props.repository = repository;
             state.Setup(props);
         }
     }
@@ -31,17 +36,5 @@ public class GameStateController : FSM.StateController
 
     protected override void OnEndTransitionCallback(State toState)
     {
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        repository = new GameRepository();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

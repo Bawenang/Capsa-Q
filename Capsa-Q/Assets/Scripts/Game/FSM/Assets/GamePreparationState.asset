@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f3106f0f1374f2099fbe43d9e2065d, type: 3}
   m_Name: GamePreparationState
   m_EditorClassIdentifier: 
-  transitionList: []
+  transitionList:
+  - {fileID: 11400000, guid: 8b064e541bb7d496a959acd7abed5790, type: 2}
+  - {fileID: 11400000, guid: 186c0d52c371f4a899e53a48c404d8f6, type: 2}
+  - {fileID: 11400000, guid: 68c45c5da36f84a43b7040629e2502af, type: 2}
+  - {fileID: 11400000, guid: 8acfa2d66188e401da0c18e1ca7e9312, type: 2}

@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "State", menuName = "ScriptableObjects/GamePreparationState", order = 3)]
+[CreateAssetMenu(fileName = "GamePreparationState", menuName = "ScriptableObjects/GamePreparationState", order = 3)]
 public class GamePreparationState : FSM.State
 {
     public class Properties 
@@ -15,6 +16,7 @@ public class GamePreparationState : FSM.State
     }
 
     private Properties properties;
+    private int nextTransition = -1;
     public override void CleanUp()
     {
     }
@@ -47,22 +49,27 @@ public class GamePreparationState : FSM.State
                                        aiCharacters[2],
                                        dealtCards[(int)PlayerType.Player4]);
 
-        var repository = new GameRepository();
-
-        repository.AddPlayer(PlayerType.Player1, selectedPlayer);
-        repository.AddPlayer(PlayerType.Player2, aiPlayer1);
-        repository.AddPlayer(PlayerType.Player3, aiPlayer2);
-        repository.AddPlayer(PlayerType.Player4, aiPlayer3);
+        props.repository.AddPlayer(PlayerType.Player1, selectedPlayer);
+        props.repository.AddPlayer(PlayerType.Player2, aiPlayer1);
+        props.repository.AddPlayer(PlayerType.Player3, aiPlayer2);
+        props.repository.AddPlayer(PlayerType.Player4, aiPlayer3);
 
         props.mainGameView.InitiatePlayer(selectedPlayer);
         props.mainGameView.InitiatePlayer(aiPlayer1);
         props.mainGameView.InitiatePlayer(aiPlayer2);
         props.mainGameView.InitiatePlayer(aiPlayer3);
+
+        for(int i = 0; i < dealtCards.Length; i++) {
+            if(Array.Exists(dealtCards[i], card => card.CardValue == 0)) {
+                nextTransition = i;
+            }
+        }
+
     }
 
     protected override int CheckTransition()
     {
-        return -1;
+        return nextTransition;
     }
 
     protected override void DoUpdateAction()

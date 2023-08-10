@@ -14,7 +14,7 @@ public class CharacterInGame : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI nameText;
     // Start is called before the first frame update
 
-    private bool IsMyTurn { 
+    public bool IsMyTurn { 
         get { return isMyTurn; }
         set { 
             frameImage.color = value ? playingColor : idleColor; 
