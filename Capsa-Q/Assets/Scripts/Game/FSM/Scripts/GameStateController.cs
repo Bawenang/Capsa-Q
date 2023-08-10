@@ -28,6 +28,12 @@ public class GameStateController : FSM.StateController
 
     protected override void OnActivateTransition(Transition transition)
     {
+        if(transition is NextTurnTransition) {
+            var props = new NextTurnTransition.Properties();
+            props.mainGameView = mainGameView;
+            props.repository = repository;
+            transition.Setup(props);
+        }
     }
 
     protected override void OnEndStateCallback(Transition withTransition)

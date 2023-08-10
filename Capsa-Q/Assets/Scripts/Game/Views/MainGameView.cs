@@ -32,4 +32,23 @@ public class MainGameView : MonoBehaviour
         var character = characters[(int)playerType];
         character.IsMyTurn = isPlayerTurn;
     }
-}
+
+    public void ChangePhoto(PlayerType playerType, Sprite sprite)
+    {
+        var character = characters[(int)playerType];
+        character.ChangePhoto(sprite);
+    }
+
+    public void ChangePhotoTemporarily(PlayerType playerType, Sprite sprite, float duration)
+    {
+        var character = characters[(int)playerType];
+        var currentPhoto = character.GetCurrentPhotoSprite();
+        character.ChangePhoto(sprite);
+        StartCoroutine(ChangePhotoAfter(character, sprite, duration));
+    }
+
+
+    private IEnumerator ChangePhotoAfter(CharacterInGame character, Sprite sprite, float duration) {
+        yield return new WaitForSeconds(duration);
+        character.ChangePhoto(sprite);
+    }}

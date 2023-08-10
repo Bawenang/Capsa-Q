@@ -46,6 +46,11 @@ public class CharacterInGame : MonoBehaviour
         photoImage.sprite = sprite;
     }
 
+    public Sprite GetCurrentPhotoSprite()
+    {
+        return photoImage.sprite;
+    }
+
     public void ChangeName(string name)
     {
         nameText.text = name;

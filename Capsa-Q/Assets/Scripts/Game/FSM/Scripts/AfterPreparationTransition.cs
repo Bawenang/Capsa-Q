@@ -23,7 +23,6 @@ public class AfterPreparationTransition : FSM.Transition
 
     protected override bool CheckTransitionFinished()
     {
-        Debug.Log("AfterPreparationTransition CheckTransitionFinished!");
         return true;
     }
 }

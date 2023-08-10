@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef16b017143c45aab2f5701877539df, type: 3}
   m_Name: Player_1_TurnState
   m_EditorClassIdentifier: 
-  transitionList: []
+  transitionList:
+  - {fileID: 11400000, guid: f12cc4be6150a49999506ac435e633f7, type: 2}
   playerType: 0
