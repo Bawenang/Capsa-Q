@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainGameView : MonoBehaviour
 {
     [SerializeField] private CharacterInGame[] characters;
-    [SerializeField] private GameObject[] cardContainers;
+    [SerializeField] private CardController[] cardControllers;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,5 +31,10 @@ public class MainGameView : MonoBehaviour
         var character = characters[(int)player.Type];
         character.ChangePhoto(player.IdleSprite);
         character.ChangeName(player.CharName);
+        
+        var cardController = cardControllers[(int)player.Type];
+        var cardDistance = cardController.isControllable ? 0.5f : 0.2f;
+        var scaleFactor = cardController.isControllable ? 1.0f : 0.5f;
+        cardController.Populate(player.Cards.ToArray(), cardDistance, scaleFactor);
     }
 }
