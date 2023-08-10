@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class CardInGame : MonoBehaviour, IPointerClickHandler
+public class CardInGame : PooledObject, IPointerClickHandler
 {
     private const int backface = -1;
     public delegate void OnTap(int value);
@@ -39,5 +39,14 @@ public class CardInGame : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if(onTap != null) onTap(cardValue);
+    }
+
+    public override void OnRetrievedFromPool()
+    {
+
+    }
+    public override void OnReturnedToPool()
+    {
+
     }
 }

@@ -22,9 +22,9 @@ public class CardController : MonoBehaviour
             cardsInHand.Add(cardValue, cards[i]);
             var newPosX = leftMostCardPos + (i * cardDistance);
             var newPos = new Vector3(newPosX, 0, -0.1f * i);
-            var newCard = Instantiate(cardPrefab, 
-                                      transform.position + newPos,
-                                      Quaternion.identity);
+            var newCard = ObjectPoolController.Instance
+                                .Instantiate<CardInGame>(transform.position + newPos,
+                                                         Quaternion.identity);
             newCard.transform.localScale = new Vector3(scaleFactor, scaleFactor, 1.0f);
             newCard.transform.parent = this.transform;
             var card = newCard.GetComponent<CardInGame>();
