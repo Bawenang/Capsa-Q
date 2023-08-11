@@ -22,4 +22,25 @@ public class CardsComparator
 
         return false;
     }
+
+    public static void GetCombinations(CardElement[] source, CardElement[] data,
+                                       int start, int end,
+                                       int index, int combinationSize,
+                                       List<CardElement[]> resultCombinations)
+    {
+        if (combinationSize == index) { 
+            resultCombinations.Add(data);
+            Debug.Log(">>> " + data[0].CardValue + ", " + data[1].CardValue + ", " + data[2].CardValue + ", " + data[3].CardValue + ", " + data[4].CardValue);
+            return;
+        }
+        for (int i = start; i <= end &&
+                end - i + 1 >= combinationSize - index; i++)
+        {
+            data[index] = source[i];
+            GetCombinations(source, data, 
+                            i + 1, end, 
+                            index + 1, combinationSize,
+                            resultCombinations);
+        }
+    }
 }
