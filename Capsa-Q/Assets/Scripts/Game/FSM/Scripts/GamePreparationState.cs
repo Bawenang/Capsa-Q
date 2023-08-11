@@ -35,19 +35,23 @@ public class GamePreparationState : FSM.State
 
         var selectedPlayer = new BasePlayer(PlayerType.Player1, 
                                             props.selectedCharacter,
-                                            dealtCards[(int)PlayerType.Player1]);
+                                            dealtCards[(int)PlayerType.Player1],
+                                            false);
 
         var aiPlayer1 = new BasePlayer(PlayerType.Player2,
                                        aiCharacters[0],
-                                       dealtCards[(int)PlayerType.Player2]);
+                                       dealtCards[(int)PlayerType.Player2],
+                                       true);
 
         var aiPlayer2 = new BasePlayer(PlayerType.Player3,
                                        aiCharacters[1],
-                                       dealtCards[(int)PlayerType.Player3]);
+                                       dealtCards[(int)PlayerType.Player3],
+                                       true);
 
         var aiPlayer3 = new BasePlayer(PlayerType.Player4,
                                        aiCharacters[2],
-                                       dealtCards[(int)PlayerType.Player4]);
+                                       dealtCards[(int)PlayerType.Player4],
+                                       true);
 
         props.repository.AddPlayer(PlayerType.Player1, selectedPlayer);
         props.repository.AddPlayer(PlayerType.Player2, aiPlayer1);

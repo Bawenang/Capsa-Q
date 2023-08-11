@@ -47,8 +47,8 @@ public class MainGameView : MonoBehaviour
         StartCoroutine(ChangePhotoAfter(character, sprite, duration));
     }
 
-
     private IEnumerator ChangePhotoAfter(CharacterInGame character, Sprite sprite, float duration) {
         yield return new WaitForSeconds(duration);
         character.ChangePhoto(sprite);
-    }}
+    }
+}
