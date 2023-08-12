@@ -88,32 +88,6 @@ public class CardComparisonTests
         Assert.False(CardsComparator.IsHigherThan(singular, pairs));
     }
 
-    [Test]
-    public void TestGetCombinations()
-    {
-        List<CardElement> mainArray = new List<CardElement> {  
-                            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
-                            CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Diamond),
-                            CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Diamond),
-                            CardElementFactory.Create(CardElement.Number.Four, CardElement.Suite.Diamond),
-                            CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Diamond),
-                            CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Club),
-                            CardElementFactory.Create(CardElement.Number.Four, CardElement.Suite.Spade) 
-                            };
-        int combinationSize = 5;
-
-        List<CardElement[]> result = new List<CardElement[]>();
-        CardElement[] data = new CardElement[combinationSize];
-         
-
-        CardsComparator.GetCombinations(mainArray.ToArray(), data, 
-                               0, mainArray.Count - 1, 
-                               0, combinationSize,
-                               result);
-
-        Assert.AreEqual(21, result.Count);
-
-    }
     private CardSet CreateStraightFlush() {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Diamond),

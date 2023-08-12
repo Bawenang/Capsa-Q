@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public class CardUtils
 {
@@ -27,5 +28,36 @@ public class CardUtils
                         card2.CardValue.CompareTo(card1.CardValue)
                    )
         );
+    }
+
+    public static void GetCombinations(CardElement[] source, CardElement[] data,
+                                       int combinationSize,
+                                       List<CardElement[]> resultCombinations)
+    {
+        GetCombinations(source, data, 
+                        0, source.Length - 1, 
+                        0,combinationSize, 
+                        resultCombinations);
+    }
+    
+    public static void GetCombinations(CardElement[] source, CardElement[] data,
+                                       int start, int end,
+                                       int index, int combinationSize,
+                                       List<CardElement[]> resultCombinations)
+    {
+        if (combinationSize == index) { 
+            resultCombinations.Add(data);
+            Console.WriteLine(">>> " + data[0].CardValue + ", " + data[1].CardValue + ", " + data[2].CardValue + ", " + data[3].CardValue + ", " + data[4].CardValue);
+            return;
+        }
+        for (int i = start; i <= end &&
+                end - i + 1 >= combinationSize - index; i++)
+        {
+            data[index] = source[i];
+            GetCombinations(source, data, 
+                            i + 1, end, 
+                            index + 1, combinationSize,
+                            resultCombinations);
+        }
     }
 }

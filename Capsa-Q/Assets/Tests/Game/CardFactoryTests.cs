@@ -339,6 +339,30 @@ public class CardFactoryTests
         AssertInvalidCardSet(invalidSet6);
     }
 
+    [Test]
+    public void TestGetCombinations()
+    {
+        List<CardElement> mainArray = new List<CardElement> {  
+                            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+                            CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Diamond),
+                            CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Diamond),
+                            CardElementFactory.Create(CardElement.Number.Four, CardElement.Suite.Diamond),
+                            CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Diamond),
+                            CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Club),
+                            CardElementFactory.Create(CardElement.Number.Four, CardElement.Suite.Spade) 
+                            };
+        int combinationSize = 5;
+
+        List<CardElement[]> result = new List<CardElement[]>();
+        CardElement[] data = new CardElement[combinationSize];
+         
+
+        CardUtils.GetCombinations(mainArray.ToArray(), data, 
+                                  combinationSize, result);
+
+        Assert.AreEqual(21, result.Count);
+    }
+
     private int GetValue(CardElement.Number number, CardElement.Suite suite) {
         var card = CardElementFactory.Create(number, suite);
         return card.CardValue;
