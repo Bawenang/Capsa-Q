@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CardUtils
 {
@@ -47,8 +48,9 @@ public class CardUtils
                                        List<CardElement[]> resultCombinations)
     {
         if (combinationSize == index) { 
-            resultCombinations.Add(data);
-            Console.WriteLine(">>> " + data[0].CardValue + ", " + data[1].CardValue + ", " + data[2].CardValue + ", " + data[3].CardValue + ", " + data[4].CardValue);
+            CardElement[] copied = new CardElement[combinationSize];
+            data.CopyTo(copied, 0);
+            resultCombinations.Add(copied);
             return;
         }
         for (int i = start; i <= end &&

@@ -276,6 +276,15 @@ public class CardFactoryTests
         AssertValidCardSet(validSet, 
                            CardsType.Pairs,
                            CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade));
+
+        CardElement[] validElement2 = {
+            CardElementFactory.Create(CardElement.Number.Jack, CardElement.Suite.Spade),
+            CardElementFactory.Create(CardElement.Number.Jack, CardElement.Suite.Diamond)
+        };
+        CardSet validSet2 = CardSetFactory.Create(validElement2);
+        AssertValidCardSet(validSet2, 
+                           CardsType.Pairs,
+                           CardElementFactory.Create(CardElement.Number.Jack, CardElement.Suite.Spade));
     }
 
     [Test]
