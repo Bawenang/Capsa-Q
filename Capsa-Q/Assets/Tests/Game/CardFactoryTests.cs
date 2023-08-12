@@ -353,12 +353,9 @@ public class CardFactoryTests
                             };
         int combinationSize = 5;
 
-        List<CardElement[]> result = new List<CardElement[]>();
-        CardElement[] data = new CardElement[combinationSize];
-         
+        List<CardElement[]> result = new List<CardElement[]>();         
 
-        CardUtils.GetCombinations(mainArray.ToArray(), data, 
-                                  combinationSize, result);
+        CardUtils.GetCombinations(mainArray.ToArray(), combinationSize, result);
 
         Assert.AreEqual(21, result.Count);
     }

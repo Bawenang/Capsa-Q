@@ -30,10 +30,11 @@ public class CardUtils
         );
     }
 
-    public static void GetCombinations(CardElement[] source, CardElement[] data,
+    public static void GetCombinations(CardElement[] source, 
                                        int combinationSize,
                                        List<CardElement[]> resultCombinations)
     {
+        CardElement[] data = new CardElement[combinationSize];
         GetCombinations(source, data, 
                         0, source.Length - 1, 
                         0,combinationSize, 
