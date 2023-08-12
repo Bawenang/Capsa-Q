@@ -66,3 +66,21 @@ public class HigherThreeCardsStrategy
     }
 }
 
+public class HigherFiveCardsStrategy
+{
+    public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
+    {
+        if(cardSet.Type == CardsType.StraightFlush) return Array.Empty<CardSet>(); //Nothing is higher than straight flush
+        List<CardElement[]> fiveCardElements = new List<CardElement[]>();
+        CardUtils.GetCombinations(cardElements, 5, fiveCardElements);
+        var sortedCards = fiveCardElements.Select(cards => CardSetFactory.Create(cards));
+
+        List<CardSet> listHigherCards = new List<CardSet>();
+        foreach (CardSet cardSetComparator in sortedCards)
+        {
+            if(CardsComparator.IsHigherThan(cardSetComparator, cardSet)) listHigherCards.Add(cardSetComparator);
+        }
+
+        return listHigherCards.ToArray();
+    }
+}
