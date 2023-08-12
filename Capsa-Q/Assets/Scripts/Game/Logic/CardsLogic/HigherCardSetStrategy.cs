@@ -33,7 +33,6 @@ public class HigherTwoCardsStrategy
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {
         if(cardSet.Type > CardsType.Pairs) return Array.Empty<CardSet>();
-        Debug.Log("Card Set: " + cardSet.Type + " | " + cardSet.HighestCard.CardNumber + " , " + cardSet.HighestCard.CardSuite);
         List<CardElement[]> pairedCardElements = new List<CardElement[]>();
         CardUtils.GetCombinations(cardElements, 2, pairedCardElements);
         var sortedPairs = pairedCardElements.Select(pairs => CardSetFactory.Create(pairs));
@@ -41,7 +40,25 @@ public class HigherTwoCardsStrategy
         List<CardSet> listHigherCards = new List<CardSet>();
         foreach (CardSet cardSetComparator in sortedPairs)
         {
-            Debug.Log("Comparator: " + cardSetComparator.Type + " | " + cardSetComparator.HighestCard.CardNumber + " , " + cardSetComparator.HighestCard.CardSuite);
+            if(CardsComparator.IsHigherThan(cardSetComparator, cardSet)) listHigherCards.Add(cardSetComparator);
+        }
+
+        return listHigherCards.ToArray();
+    }
+}
+
+public class HigherThreeCardsStrategy
+{
+    public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
+    {
+        if(cardSet.Type > CardsType.Triplets) return Array.Empty<CardSet>();
+        List<CardElement[]> pairedCardElements = new List<CardElement[]>();
+        CardUtils.GetCombinations(cardElements, 3, pairedCardElements);
+        var sortedTris = pairedCardElements.Select(tris => CardSetFactory.Create(tris));
+
+        List<CardSet> listHigherCards = new List<CardSet>();
+        foreach (CardSet cardSetComparator in sortedTris)
+        {
             if(CardsComparator.IsHigherThan(cardSetComparator, cardSet)) listHigherCards.Add(cardSetComparator);
         }
 
