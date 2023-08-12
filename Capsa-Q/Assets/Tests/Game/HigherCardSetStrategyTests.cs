@@ -49,6 +49,32 @@ public class HigherCardSetStrategyTests
     }
 
     [Test]
+    public void TestHigherThreeCardsStrategy()
+    {
+        CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
+                                CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Diamond),
+                                CardElementFactory.Create(CardElement.Number.Jack, CardElement.Suite.Heart),
+                                CardElementFactory.Create(CardElement.Number.Four, CardElement.Suite.Diamond),
+                                CardElementFactory.Create(CardElement.Number.Seven, CardElement.Suite.Diamond),
+                                CardElementFactory.Create(CardElement.Number.Jack, CardElement.Suite.Spade),
+                                CardElementFactory.Create(CardElement.Number.Four, CardElement.Suite.Spade),
+                                CardElementFactory.Create(CardElement.Number.Jack, CardElement.Suite.Diamond),
+                                CardElementFactory.Create(CardElement.Number.Four, CardElement.Suite.Club),
+                                CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Diamond) };
+
+        var cardElementToCheck = new CardElement[] {
+                        CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Spade),
+                        CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Club),
+                        CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Heart) };
+        var cardSetToCheck = CardSetFactory.Create(cardElementToCheck);
+
+        var sut = new HigherThreeCardsStrategy();
+        var actualResults = sut.GetHigherSets(cardSetToCheck, cards);
+
+        Assert.AreEqual(1, actualResults.Length);
+    }
+
+    [Test]
     public void TestHigherFiveCardsStrategy()
     {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
