@@ -47,6 +47,16 @@ public class MainGameView : MonoBehaviour
         StartCoroutine(ChangePhotoAfter(character, sprite, duration));
     }
 
+    public void PlaySet(CardSet playSet)
+    {
+
+    }
+
+    public void PassTurn()
+    {
+
+    }
+
     private IEnumerator ChangePhotoAfter(CharacterInGame character, Sprite sprite, float duration) {
         yield return new WaitForSeconds(duration);
         character.ChangePhoto(sprite);

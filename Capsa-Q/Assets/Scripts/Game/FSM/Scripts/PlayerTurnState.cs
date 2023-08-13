@@ -27,6 +27,8 @@ public class PlayerTurnState : FSM.State
 
         var player = props.repository.GetPlayer(playerType);
         props.mainGameView.ActivatePlayer(playerType, true);
+
+        DoAIAction(props, player);
         props.mainGameView.StartCoroutine(NextTurn());
     }
 
@@ -50,5 +52,21 @@ public class PlayerTurnState : FSM.State
         yield return new WaitForSeconds(3f);
         Debug.Log("PlayerTurnState NextTurn! player: " + playerType);
         nextTransition = 0;
+    }
+
+    private void DoAIAction(Properties props, Player player)
+    {
+        var aiPlayer = player as AIPlayer;
+
+        if(aiPlayer != null)
+        {
+            var playedSet = props.repository.GetTopPlayedCards();
+            var selectedCard = aiPlayer.SelectPlayCardSet(playedSet);
+            if(selectedCard.Type == CardSetFactory.Invalid.Type) {
+                props.mainGameView.PassTurn();
+            } else {
+                props.mainGameView.PlaySet(selectedCard);
+            }
+        }
     }
 }
