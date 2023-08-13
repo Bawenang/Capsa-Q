@@ -13,7 +13,6 @@ public enum PlayerType
 
 public interface Player
 {
-    bool IsAI { get; }
     PlayerType Type { get; }
     string CharName { get; }
     Sprite IdleSprite { get; }
@@ -25,7 +24,6 @@ public interface Player
 
 public class BasePlayer: Player
 {
-    public bool IsAI { get => isAI; }
     public PlayerType Type { get => type; }
     public string CharName { get => charName; }
     public Sprite IdleSprite { get => sprites[SpriteState.Idle]; }
@@ -33,15 +31,12 @@ public class BasePlayer: Player
     public Sprite WinSprite { get => sprites[SpriteState.Win]; }
     public Sprite LoseSprite { get => sprites[SpriteState.Lose]; }
     public List<CardElement> Cards { get => cards; }
-
-    protected bool isAI;
     protected PlayerType type;
     protected string charName;
     protected Dictionary<SpriteState, Sprite> sprites = new Dictionary<SpriteState, Sprite>();
     protected List<CardElement> cards = new List<CardElement>();
 
-    public BasePlayer(PlayerType type, CharacterData character, CardElement[] cards, bool isAI) {
-        this.isAI = isAI;
+    public BasePlayer(PlayerType type, CharacterData character, CardElement[] cards) {
         this.type = type;
         sprites.Add(SpriteState.Idle, character.GetSprite(SpriteState.Idle));
         sprites.Add(SpriteState.Play, character.GetSprite(SpriteState.Play));

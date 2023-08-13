@@ -33,25 +33,26 @@ public class GamePreparationState : FSM.State
         var shuffler = new CardShuffler();
         var dealtCards = shuffler.ShuffleAndDeal();
 
+        var cardSelector = CreateCardSelector();
+
         var selectedPlayer = new BasePlayer(PlayerType.Player1, 
                                             props.selectedCharacter,
-                                            dealtCards[(int)PlayerType.Player1],
-                                            false);
+                                            dealtCards[(int)PlayerType.Player1]);
 
-        var aiPlayer1 = new BasePlayer(PlayerType.Player2,
-                                       aiCharacters[0],
-                                       dealtCards[(int)PlayerType.Player2],
-                                       true);
+        var aiPlayer1 = new AIPlayer(PlayerType.Player2,
+                                     aiCharacters[0],
+                                     dealtCards[(int)PlayerType.Player2],
+                                     cardSelector);
 
-        var aiPlayer2 = new BasePlayer(PlayerType.Player3,
-                                       aiCharacters[1],
-                                       dealtCards[(int)PlayerType.Player3],
-                                       true);
+        var aiPlayer2 = new AIPlayer(PlayerType.Player3,
+                                     aiCharacters[1],
+                                     dealtCards[(int)PlayerType.Player3],
+                                     cardSelector);
 
-        var aiPlayer3 = new BasePlayer(PlayerType.Player4,
-                                       aiCharacters[2],
-                                       dealtCards[(int)PlayerType.Player4],
-                                       true);
+        var aiPlayer3 = new AIPlayer(PlayerType.Player4,
+                                     aiCharacters[2],
+                                     dealtCards[(int)PlayerType.Player4],
+                                     cardSelector);
 
         props.repository.AddPlayer(PlayerType.Player1, selectedPlayer);
         props.repository.AddPlayer(PlayerType.Player2, aiPlayer1);
@@ -68,7 +69,6 @@ public class GamePreparationState : FSM.State
                 nextTransition = i;
             }
         }
-
     }
 
     protected override int CheckTransition()
@@ -101,5 +101,21 @@ public class GamePreparationState : FSM.State
         }
 
         return charList.Take(3).ToArray();
+    }
+
+    private CardSelecting CreateCardSelector()
+    {
+        var oneCardStrategy = new HigherOneCardStrategy();
+        var twoCardStrategy = new HigherTwoCardsStrategy();
+        var threeCardStrategy = new HigherThreeCardsStrategy();
+        var fiveCardStrategy = new HigherFiveCardsStrategy();
+        var strategies = new HigherCardSetStrategy[] {
+            oneCardStrategy,
+            twoCardStrategy,
+            threeCardStrategy,
+            fiveCardStrategy
+        };
+        var cardSelector = new CardSelector(strategies: strategies);
+        return cardSelector;
     }
 }

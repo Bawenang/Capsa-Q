@@ -9,7 +9,7 @@ public interface HigherCardSetStrategy
     
 }
 
-public class HigherOneCardStrategy
+public class HigherOneCardStrategy: HigherCardSetStrategy
 {
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {
@@ -28,7 +28,7 @@ public class HigherOneCardStrategy
     }
 }
 
-public class HigherTwoCardsStrategy
+public class HigherTwoCardsStrategy: HigherCardSetStrategy
 {
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {
@@ -47,7 +47,7 @@ public class HigherTwoCardsStrategy
     }
 }
 
-public class HigherThreeCardsStrategy
+public class HigherThreeCardsStrategy: HigherCardSetStrategy
 {
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {
@@ -66,7 +66,7 @@ public class HigherThreeCardsStrategy
     }
 }
 
-public class HigherFiveCardsStrategy
+public class HigherFiveCardsStrategy: HigherCardSetStrategy
 {
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {
