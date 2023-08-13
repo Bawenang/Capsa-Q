@@ -7,6 +7,7 @@ public class CardController : MonoBehaviour
     public delegate void OnChangeSelectedCards(CardElement[] selectedCards);
     public event OnChangeSelectedCards onChangeSelectedCards;
 
+    public bool isShowing;
     public bool isControllable;
     [SerializeField] private GameObject cardPrefab;
     private Dictionary<int, CardElement> cardsInHand = new Dictionary<int, CardElement>();
@@ -29,7 +30,7 @@ public class CardController : MonoBehaviour
             newCard.transform.parent = this.transform;
             var card = newCard.GetComponent<CardInGame>();
             card.onTap += SelectCard;
-            card.Load(cardValue, isControllable);
+            card.Load(cardValue, isShowing, isControllable);
             cardGameObjectsInHand.Add(card);
         }
     }

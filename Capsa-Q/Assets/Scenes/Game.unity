@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9db49e787c04ab4b7890fb54798180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShowing: 1
   isControllable: 1
   cardPrefab: {fileID: 7355786467108002970, guid: 865380e3f7c1c47ea904afc6aa5e1f90, type: 3}
 --- !u!1 &60285201
@@ -920,6 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9db49e787c04ab4b7890fb54798180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShowing: 0
   isControllable: 0
   cardPrefab: {fileID: 7355786467108002970, guid: 865380e3f7c1c47ea904afc6aa5e1f90, type: 3}
 --- !u!1 &519420028
@@ -1377,6 +1379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9db49e787c04ab4b7890fb54798180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShowing: 0
   isControllable: 0
   cardPrefab: {fileID: 7355786467108002970, guid: 865380e3f7c1c47ea904afc6aa5e1f90, type: 3}
 --- !u!1 &921861507
@@ -2800,6 +2803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9db49e787c04ab4b7890fb54798180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShowing: 0
   isControllable: 0
   cardPrefab: {fileID: 7355786467108002970, guid: 865380e3f7c1c47ea904afc6aa5e1f90, type: 3}
 --- !u!1 &2043959106
