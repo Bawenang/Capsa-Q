@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardUtils
@@ -35,7 +36,7 @@ public class CardUtils
         Array.Sort(sortedCardSets, 
                    new Comparison<CardSet>((cardSet1, cardSet2) => 
                         { 
-                            var result = CardsComparator.IsHigherThan(cardSet2, cardSet1) ? 1 : -1;
+                            var result = CardsComparator.IsHigherThan(cardSet1, cardSet2) ? 1 : -1;
                             return result;
                         }
                    )
@@ -73,5 +74,17 @@ public class CardUtils
                             index + 1, combinationSize,
                             resultCombinations);
         }
+    }
+
+    public static CardSet GetSingularCardSet(int withValue, CardElement[] fromCards)
+    {
+        var query = from card in fromCards
+                    where card.CardValue == withValue
+                    select card;
+        
+        var foundCard = query.DefaultIfEmpty(CardElementFactory.Unknown).FirstOrDefault();
+
+        if(foundCard.CardNumber == CardElement.Number.Unknown) return CardSetFactory.Invalid;
+        else return CardSetFactory.Create(new CardElement[] { foundCard });
     }
 }

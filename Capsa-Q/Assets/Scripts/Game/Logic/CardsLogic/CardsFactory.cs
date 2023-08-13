@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 public class CardElementFactory {
+    public static CardElement Unknown = CreateInvalidImpl();
     public static CardElement Create(CardElement.Number number, CardElement.Suite suite) {
         return new CardElement(number, 
                                suite, 
@@ -15,6 +16,10 @@ public class CardElementFactory {
         return new CardElement(CardUtils.GetCardNumber(value),
                                CardUtils.GetCardSuite(value),
                                value);
+    }
+
+    private static CardElement CreateInvalidImpl() {
+        return Create(CardElement.Number.Unknown, CardElement.Suite.Unknown);
     }
 }
 
