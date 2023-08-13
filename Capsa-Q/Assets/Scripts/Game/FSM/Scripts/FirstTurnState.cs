@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerTurnState", menuName = "ScriptableObjects/PlayerTurnState", order = 5)]
-public class PlayerTurnState : FSM.State
+[CreateAssetMenu(fileName = "FirstTurnState", menuName = "ScriptableObjects/FirstTurnState", order = 4)]
+public class FirstTurnState : FSM.State
 {
     public class Properties 
     {
@@ -18,7 +17,6 @@ public class PlayerTurnState : FSM.State
 
     public override void Setup(object properties)
     {
-        Debug.Log("PlayerTurnState Setup! player: " + playerType);
         nextTransition = -1;
         props = properties as Properties;
         if (props == null) {
@@ -30,6 +28,7 @@ public class PlayerTurnState : FSM.State
         props.mainGameView.ActivatePlayer(playerType, true);
 
         DoAIAction(props, player);
+        props.mainGameView.StartCoroutine(NextTurn());
     }
 
     public override void CleanUp()
@@ -49,7 +48,7 @@ public class PlayerTurnState : FSM.State
 
     private IEnumerator NextTurn() 
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         Debug.Log("PlayerTurnState NextTurn! player: " + playerType);
         nextTransition = 0;
     }
@@ -60,21 +59,8 @@ public class PlayerTurnState : FSM.State
 
         if(aiPlayer != null)
         {
-            var playedSet = props.repository.GetTopPlayedCards();
-            if(props.repository.GetTopPlayedCards().Type == CardSetFactory.Invalid.Type) {
-                var selectedCard = CardUtils.GetSingularCardSet(0, player.Cards.ToArray());
-                PlayCard(selectedCard, player);
-            } else {
-                var selectedCard = aiPlayer.SelectPlayCardSet(playedSet);
-                if (selectedCard.Type == CardSetFactory.Invalid.Type) {
-                    PassTurn();
-                } else {
-                    PlayCard(selectedCard, player);
-                }
-            }
-            props.mainGameView.StartCoroutine(NextTurn());
-        } else {
-            props.mainGameView.StartCoroutine(NextTurn());
+            var selectedCard = CardUtils.GetSingularCardSet(0, aiPlayer.Cards.ToArray());
+            PlayCard(selectedCard, aiPlayer);
         }
     }
 
@@ -86,10 +72,4 @@ public class PlayerTurnState : FSM.State
         props.mainGameView.UpdateCards(player.Type, player.Cards.ToArray());
         props.repository.lastPlaying = playerType;
     }
-
-    private void PassTurn()
-    {
-        props.mainGameView.PassTurn();
-    }
-
 }

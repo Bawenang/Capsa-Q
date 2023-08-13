@@ -18,6 +18,11 @@ public class GameStateController : FSM.StateController
             props.selectedCharacter = selectedCharacter;
             props.allCharacters = allCharacters;
             state.Setup(props);
+        } else if(state is FirstTurnState) {
+            var props = new FirstTurnState.Properties();
+            props.mainGameView = mainGameView;
+            props.repository = repository;
+            state.Setup(props);
         } else if(state is PlayerTurnState) {
             var props = new PlayerTurnState.Properties();
             props.mainGameView = mainGameView;

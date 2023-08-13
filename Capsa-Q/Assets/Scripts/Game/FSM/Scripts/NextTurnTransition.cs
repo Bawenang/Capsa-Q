@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NextTurnTransition", menuName = "ScriptableObjects/NextTurnTransition", order = 6)]
+[CreateAssetMenu(fileName = "NextTurnTransition", menuName = "ScriptableObjects/NextTurnTransition", order = 7)]
 public class NextTurnTransition : FSM.Transition
 {
     public class Properties 

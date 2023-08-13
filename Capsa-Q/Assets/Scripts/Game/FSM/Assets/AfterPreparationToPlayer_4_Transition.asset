@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc258912a33348088ac97d917d9b1ea, type: 3}
   m_Name: AfterPreparationToPlayer_4_Transition
   m_EditorClassIdentifier: 
-  fromState: {fileID: 0}
-  endState: {fileID: 11400000, guid: a9ed3384776754b38bfdf7d3f478fdb0, type: 2}
+  fromState: {fileID: 11400000, guid: b01c39815a8654585908577e36c92c4b, type: 2}
+  endState: {fileID: 11400000, guid: 34f7b49949ee045f795c25a2a5309e1f, type: 2}
   timeout: 0

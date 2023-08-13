@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: AfterPreparationToPlayer_1_Transition
   m_EditorClassIdentifier: 
   fromState: {fileID: 0}
-  endState: {fileID: 11400000, guid: 2bfded92ebaa845b087769a27edf3ea7, type: 2}
+  endState: {fileID: 11400000, guid: 2dea369fe82e44d3f92e43d0a3b35f4b, type: 2}
   timeout: 0

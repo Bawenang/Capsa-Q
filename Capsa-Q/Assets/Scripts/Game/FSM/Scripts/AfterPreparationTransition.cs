@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AfterPreparationTransition", menuName = "ScriptableObjects/AfterPreparationTransition", order = 5)]
+[CreateAssetMenu(fileName = "AfterPreparationTransition", menuName = "ScriptableObjects/AfterPreparationTransition", order = 6)]
 public class AfterPreparationTransition : FSM.Transition
 {
     public override void Setup(object properties)
