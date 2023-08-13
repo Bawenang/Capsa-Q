@@ -31,6 +31,17 @@ public class CardUtils
         );
     }
 
+    public static void SortCardSetsAscending(ref CardSet[] sortedCardSets) {
+        Array.Sort(sortedCardSets, 
+                   new Comparison<CardSet>((cardSet1, cardSet2) => 
+                        { 
+                            var result = CardsComparator.IsHigherThan(cardSet2, cardSet1) ? 1 : -1;
+                            return result;
+                        }
+                   )
+        );
+    }
+
     public static void GetCombinations(CardElement[] source, 
                                        int combinationSize,
                                        List<CardElement[]> resultCombinations)
