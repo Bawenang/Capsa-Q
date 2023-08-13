@@ -30,6 +30,7 @@ public class ObjectPool : MonoBehaviour
     {
         pooledObject.transform.position = this.transform.position;
         pooledObject.transform.rotation = this.transform.rotation;
+        pooledObject.transform.parent = this.transform;
         pooledObject.gameObject.SetActive(false);
         objectStack.Push(pooledObject);
     }

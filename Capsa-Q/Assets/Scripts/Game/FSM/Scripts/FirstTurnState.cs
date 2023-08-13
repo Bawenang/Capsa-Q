@@ -28,7 +28,6 @@ public class FirstTurnState : FSM.State
         props.mainGameView.ActivatePlayer(playerType, true);
 
         DoAIAction(props, player);
-        props.mainGameView.StartCoroutine(NextTurn());
     }
 
     public override void CleanUp()
@@ -46,13 +45,6 @@ public class FirstTurnState : FSM.State
     {
     }
 
-    private IEnumerator NextTurn() 
-    {
-        yield return new WaitForSeconds(3f);
-        Debug.Log("PlayerTurnState NextTurn! player: " + playerType);
-        nextTransition = 0;
-    }
-
     private void DoAIAction(Properties props, Player player)
     {
         var aiPlayer = player as AIPlayer;
@@ -60,16 +52,18 @@ public class FirstTurnState : FSM.State
         if(aiPlayer != null)
         {
             var selectedCard = CardUtils.GetSingularCardSet(0, aiPlayer.Cards.ToArray());
-            PlayCard(selectedCard, aiPlayer);
+            props.mainGameView.StartCoroutine(PlayCard(selectedCard, aiPlayer));
         }
     }
 
-    private void PlayCard(CardSet playSet, Player player)
+    private IEnumerator PlayCard(CardSet playSet, Player player)
     {
+        yield return new WaitForSeconds(2f);
         props.mainGameView.PlaySet(playSet);
         props.repository.AddPlayedCard(playSet);
         player.RemoveCards(playSet);
         props.mainGameView.UpdateCards(player.Type, player.Cards.ToArray());
         props.repository.lastPlaying = playerType;
+        nextTransition = 0;
     }
 }

@@ -48,6 +48,7 @@ public class ObjectPoolController : MonoBehaviour
 
     public void Remove<T>(T pooledObject)
     {
+        Debug.Log(">>>>> Type = " + typeof(T));
         var pooledObjectToRemove = pooledObject as PooledObject;
         if(pooledObjectToRemove != null && !objectPools.ContainsKey(typeof(T))) {
             return;

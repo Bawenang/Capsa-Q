@@ -9,7 +9,6 @@ public class CardController : MonoBehaviour
 
     public bool isShowing;
     public bool isControllable;
-    [SerializeField] private GameObject cardPrefab;
     private Dictionary<int, CardElement> cardsInHand = new Dictionary<int, CardElement>();
     private List<CardInGame> cardGameObjectsInHand = new List<CardInGame>();
     private List<int> selectedCardValues = new List<int>();

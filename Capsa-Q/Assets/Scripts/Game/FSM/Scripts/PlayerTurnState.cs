@@ -47,13 +47,6 @@ public class PlayerTurnState : FSM.State
     {
     }
 
-    private IEnumerator NextTurn() 
-    {
-        yield return new WaitForSeconds(2f);
-        Debug.Log("PlayerTurnState NextTurn! player: " + playerType);
-        nextTransition = 0;
-    }
-
     private void DoAIAction(Properties props, Player player)
     {
         var aiPlayer = player as AIPlayer;
@@ -63,33 +56,36 @@ public class PlayerTurnState : FSM.State
             var playedSet = props.repository.GetTopPlayedCards();
             if(props.repository.GetTopPlayedCards().Type == CardSetFactory.Invalid.Type) {
                 var selectedCard = CardUtils.GetSingularCardSet(0, player.Cards.ToArray());
-                PlayCard(selectedCard, player);
+                props.mainGameView.StartCoroutine(PlayCard(selectedCard, player));
             } else {
                 var selectedCard = aiPlayer.SelectPlayCardSet(playedSet);
                 if (selectedCard.Type == CardSetFactory.Invalid.Type) {
-                    PassTurn();
+                    props.mainGameView.StartCoroutine(PassTurn());
                 } else {
-                    PlayCard(selectedCard, player);
+                    props.mainGameView.StartCoroutine(PlayCard(selectedCard, player));
                 }
             }
-            props.mainGameView.StartCoroutine(NextTurn());
         } else {
-            props.mainGameView.StartCoroutine(NextTurn());
+            props.mainGameView.StartCoroutine(PassTurn());
         }
     }
 
-    private void PlayCard(CardSet playSet, Player player)
+    private IEnumerator PlayCard(CardSet playSet, Player player)
     {
+        yield return new WaitForSeconds(2f);
         props.mainGameView.PlaySet(playSet);
         props.repository.AddPlayedCard(playSet);
         player.RemoveCards(playSet);
         props.mainGameView.UpdateCards(player.Type, player.Cards.ToArray());
         props.repository.lastPlaying = playerType;
+        nextTransition = 0;
     }
 
-    private void PassTurn()
+    private IEnumerator PassTurn()
     {
+        yield return new WaitForSeconds(2f);
         props.mainGameView.PassTurn();
+        nextTransition = 0;
     }
 
 }

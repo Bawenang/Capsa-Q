@@ -6,6 +6,7 @@ public class MainGameView : MonoBehaviour
 {
     [SerializeField] private CharacterInGame[] characters;
     [SerializeField] private CardController[] cardControllers;
+    [SerializeField] private CardController playedCardController;
 
     public void Populate(CharacterData player, CharacterData[] aiPlayer)
     {
@@ -52,7 +53,7 @@ public class MainGameView : MonoBehaviour
 
     public void PlaySet(CardSet playSet)
     {
-        Debug.Log(">>>>>>>> PlaySet: " + playSet.Type + " | " + playSet.HighestCard.CardNumber + " , " + playSet.HighestCard.CardSuite);
+        playedCardController.Populate(playSet.Cards);
     }
 
     public void PassTurn()
