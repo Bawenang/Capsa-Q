@@ -14,8 +14,26 @@ public class CardController : MonoBehaviour
     private List<CardInGame> cardGameObjectsInHand = new List<CardInGame>();
     private List<int> selectedCardValues = new List<int>();
 
-    public void Populate(CardElement[] cards, float cardDistance, float scaleFactor)
+    public void Populate(CardElement[] cards)
     {
+        ClearCardsInHand();
+        AddAll(cards);
+    }
+
+    public void ClearCardsInHand()
+    {
+        foreach (var card in cardGameObjectsInHand)
+        {
+            ObjectPoolController.Instance.Remove(card);
+        }
+        cardsInHand.Clear();
+        cardGameObjectsInHand.Clear();
+    }
+
+    private void AddAll(CardElement[] cards)
+    {
+        var scaleFactor = isShowing ? 1.0f : 0.5f;
+        var cardDistance = isShowing ? 0.5f : 0.2f;
         var leftMostCardPos = GetLeftMostPosition(cards, cardDistance);
         for(int i = 0; i < cards.Length; i++)
         {

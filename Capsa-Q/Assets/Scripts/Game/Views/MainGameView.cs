@@ -18,13 +18,10 @@ public class MainGameView : MonoBehaviour
     public void InitiatePlayer(Player player)
     {
         var character = characters[(int)player.Type];
+        var cardController = cardControllers[(int)player.Type];
         character.ChangePhoto(player.IdleSprite);
         character.ChangeName(player.CharName);
-        
-        var cardController = cardControllers[(int)player.Type];
-        var cardDistance = cardController.isControllable ? 0.5f : 0.2f;
-        var scaleFactor = cardController.isControllable ? 1.0f : 0.5f;
-        cardController.Populate(player.Cards.ToArray(), cardDistance, scaleFactor);
+        cardController.Populate(player.Cards.ToArray());
     }
 
     public void ActivatePlayer(PlayerType playerType, bool isPlayerTurn)
@@ -47,9 +44,15 @@ public class MainGameView : MonoBehaviour
         StartCoroutine(ChangePhotoAfter(character, sprite, duration));
     }
 
+    public void UpdateCards(PlayerType playerType, CardElement[] cards)
+    {
+        var cardController = cardControllers[(int)playerType];
+        cardController.Populate(cards);
+    }
+
     public void PlaySet(CardSet playSet)
     {
-
+        Debug.Log(">>>>>>>> PlaySet: " + playSet.Type + " | " + playSet.HighestCard.CardNumber + " , " + playSet.HighestCard.CardSuite);
     }
 
     public void PassTurn()

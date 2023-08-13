@@ -20,6 +20,7 @@ public interface Player
     Sprite WinSprite { get; }
     Sprite LoseSprite { get; }
     List<CardElement> Cards { get; }
+    void RemoveCards(CardSet inCardSet);
 }
 
 public class BasePlayer: Player
@@ -44,5 +45,13 @@ public class BasePlayer: Player
         sprites.Add(SpriteState.Lose, character.GetSprite(SpriteState.Lose));
         charName = character.charName;
         this.cards.AddRange(cards);
+    }
+
+    public void RemoveCards(CardSet inCardSet)
+    {
+        foreach (var card in inCardSet.Cards)
+        {
+            cards.Remove(card);
+        }
     }
 }
