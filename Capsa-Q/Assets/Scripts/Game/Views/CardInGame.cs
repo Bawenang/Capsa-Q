@@ -22,23 +22,31 @@ public class CardInGame : PooledObject, IPointerClickHandler
         }
     }
 
+    public bool IsControllable {
+        get => isControllable;
+        set => isControllable = value;
+    }
+
     private SpriteRenderer spriteRenderer;
     private int cardValue;
     private bool isShowing;
+    private bool isControllable;
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Load(int cardValue, bool isShowing)
+    public void Load(int cardValue, bool isShowing, bool isControllable)
     {
         this.cardValue = cardValue;
         IsShowing = isShowing;
+        IsControllable = isControllable;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(onTap != null) onTap(cardValue);
+        if(isControllable && onTap != null) onTap(cardValue);
     }
 
     public override void OnRetrievedFromPool()
