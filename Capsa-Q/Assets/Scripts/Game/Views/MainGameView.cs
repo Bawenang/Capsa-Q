@@ -12,6 +12,7 @@ public class MainGameView : MonoBehaviour
     [SerializeField] private Button playSetButton;
     [SerializeField] private Button passButton;
     [SerializeField] private GameObject passTextContainer;
+    [SerializeField] private CongratulationDialogView congratulationDialog;
 
     public delegate void OnSelectedCardSet(CardSet cardSet);
     public event OnSelectedCardSet onSelectedCardSet;
@@ -31,6 +32,7 @@ public class MainGameView : MonoBehaviour
         ShowPassText(false);
         ActivatePlaySetButton(false);
         ActivatePassButton(false);
+        congratulationDialog.gameObject.SetActive(false);
     }
 
     public void Populate(CharacterData player, CharacterData[] aiPlayer)
@@ -121,6 +123,12 @@ public class MainGameView : MonoBehaviour
     {
         passTextContainer.SetActive(isShown);
     }    
+
+    public void ShowCongratulations(string winnerName)
+    {
+        congratulationDialog.SetWinnerName(winnerName);
+        congratulationDialog.gameObject.SetActive(true);
+    }
 
     private IEnumerator ChangePhotoAfter(CharacterInGame character, Sprite sprite, float duration) {
         yield return new WaitForSeconds(duration);
