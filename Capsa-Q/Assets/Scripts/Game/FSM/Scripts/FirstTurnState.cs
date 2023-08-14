@@ -26,6 +26,8 @@ public class FirstTurnState : FSM.State
 
         var player = props.repository.GetPlayer(playerType);
         props.mainGameView.ActivatePlayer(playerType, true);
+        props.mainGameView.ShowPassText(false);
+        props.mainGameView.ActivatePassButton(false);
 
         PlayerAction(props, player);
     }
@@ -63,18 +65,18 @@ public class FirstTurnState : FSM.State
         } else {
             props.mainGameView.ShowButtons(false);
             var selectedCard = CardUtils.GetSingularCardSet(0, aiPlayer.Cards.ToArray());
-            props.mainGameView.StartCoroutine(PlayCard(selectedCard, aiPlayer));
+            props.mainGameView.StartCoroutine(PlayCard(selectedCard, aiPlayer, 2f));
         }
     }
 
-    private IEnumerator PlayCard(CardSet playSet, Player player)
+    private IEnumerator PlayCard(CardSet playSet, Player player, float waitDuration)
     {
+        yield return new WaitForSeconds(waitDuration);
         props.mainGameView.PlaySet(playSet);
         props.repository.AddPlayedCard(playSet);
         player.RemoveCards(playSet);
         props.mainGameView.UpdateCards(player.Type, player.Cards.ToArray());
         props.repository.lastPlaying = playerType;
-        yield return new WaitForSeconds(2f);
         nextTransition = 0;
     }
 
@@ -89,6 +91,6 @@ public class FirstTurnState : FSM.State
     private void PlaySelectedCard(CardSet selectedCardSet)
     {
         var player = props.repository.GetPlayer(playerType);
-        props.mainGameView.StartCoroutine(PlayCard(selectedCardSet, player));
+        props.mainGameView.StartCoroutine(PlayCard(selectedCardSet, player, 0f));
     }
 }

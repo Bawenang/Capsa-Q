@@ -28,6 +28,8 @@ public class PlayerTurnState : FSM.State
 
         var player = props.repository.GetPlayer(playerType);
         props.mainGameView.ActivatePlayer(playerType, true);
+        props.mainGameView.ShowPassText(false);
+        props.mainGameView.ActivatePassButton(true);
 
         PlayerAction(props, player);
     }
@@ -40,6 +42,7 @@ public class PlayerTurnState : FSM.State
         if(aiPlayer == null) {
             props.mainGameView.onSelectedCardSet -= CheckValidity;
             props.mainGameView.onPlayCardSet -= PlaySelectedCard;
+            props.mainGameView.onPassTurn -= Pass;
             props.mainGameView.ShowButtons(false);
         }
     }
@@ -60,38 +63,39 @@ public class PlayerTurnState : FSM.State
         if(aiPlayer == null) {
             props.mainGameView.onSelectedCardSet += CheckValidity;
             props.mainGameView.onPlayCardSet += PlaySelectedCard;
+            props.mainGameView.onPassTurn += Pass;
             props.mainGameView.ShowButtons(true);
             props.mainGameView.ActivatePlaySetButton(false);
         } else {
             var playedSet = props.repository.GetTopPlayedCards();
             if(props.repository.GetTopPlayedCards().SetType == CardSetFactory.Invalid.SetType) {
                 var selectedCard = CardUtils.GetSingularCardSet(0, player.Cards.ToArray());
-                props.mainGameView.StartCoroutine(PlayCard(selectedCard, player));
+                props.mainGameView.StartCoroutine(PlayCard(selectedCard, player, 2f));
             } else {
                 var selectedCard = aiPlayer.SelectPlayCardSet(playedSet);
                 if (selectedCard.SetType == CardSetFactory.Invalid.SetType) {
-                    props.mainGameView.StartCoroutine(PassTurn());
+                    props.mainGameView.StartCoroutine(PassTurn(2f));
                 } else {
-                    props.mainGameView.StartCoroutine(PlayCard(selectedCard, player));
+                    props.mainGameView.StartCoroutine(PlayCard(selectedCard, player, 2f));
                 }
             }
         }
     }
 
-    private IEnumerator PlayCard(CardSet playSet, Player player)
+    private IEnumerator PlayCard(CardSet playSet, Player player, float waitDuration)
     {
+        yield return new WaitForSeconds(waitDuration);
         props.mainGameView.PlaySet(playSet);
         props.repository.AddPlayedCard(playSet);
         player.RemoveCards(playSet);
         props.mainGameView.UpdateCards(player.Type, player.Cards.ToArray());
         props.repository.lastPlaying = playerType;
-        yield return new WaitForSeconds(2f);
         nextTransition = 0;
     }
 
-    private IEnumerator PassTurn()
+    private IEnumerator PassTurn(float waitDuration)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(waitDuration);
         props.mainGameView.PassTurn();
         nextTransition = 0;
     }
@@ -106,6 +110,11 @@ public class PlayerTurnState : FSM.State
     private void PlaySelectedCard(CardSet selectedCardSet)
     {
         var player = props.repository.GetPlayer(playerType);
-        props.mainGameView.StartCoroutine(PlayCard(selectedCardSet, player));
+        props.mainGameView.StartCoroutine(PlayCard(selectedCardSet, player, 0f));
+    }
+
+    private void Pass()
+    {
+        props.mainGameView.StartCoroutine(PassTurn(0f));
     }
 }

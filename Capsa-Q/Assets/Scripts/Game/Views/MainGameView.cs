@@ -11,6 +11,7 @@ public class MainGameView : MonoBehaviour
     [SerializeField] private GameObject playerButtonContainer;
     [SerializeField] private Button playSetButton;
     [SerializeField] private Button passButton;
+    [SerializeField] private GameObject passTextContainer;
 
     public delegate void OnSelectedCardSet(CardSet cardSet);
     public event OnSelectedCardSet onSelectedCardSet;
@@ -18,11 +19,18 @@ public class MainGameView : MonoBehaviour
     public delegate void OnPlayCardSet(CardSet cardSet);
     public event OnPlayCardSet onPlayCardSet;
 
+    public delegate void OnPassTurn();
+    public event OnPassTurn onPassTurn;
+
     private CardSet playedSet;
 
     void Awake()
     {
         playSetButton.onClick.AddListener(OnPlaySetButton);
+        passButton.onClick.AddListener(OnPassButton);
+        ShowPassText(false);
+        ActivatePlaySetButton(false);
+        ActivatePassButton(false);
     }
 
     public void Populate(CharacterData player, CharacterData[] aiPlayer)
@@ -86,7 +94,7 @@ public class MainGameView : MonoBehaviour
 
     public void PassTurn()
     {
-
+        ShowPassText(true);
     }
 
     public void ShowButtons(bool isShown)
@@ -98,6 +106,16 @@ public class MainGameView : MonoBehaviour
     {
         playSetButton.gameObject.SetActive(isActive);
     }
+
+    public void ActivatePassButton(bool isActive)
+    {
+        passButton.gameObject.SetActive(isActive);
+    }
+
+    public void ShowPassText(bool isShown)
+    {
+        passTextContainer.SetActive(isShown);
+    }    
 
     private IEnumerator ChangePhotoAfter(CharacterInGame character, Sprite sprite, float duration) {
         yield return new WaitForSeconds(duration);
@@ -113,5 +131,10 @@ public class MainGameView : MonoBehaviour
     private void OnPlaySetButton()
     {
         if(onPlayCardSet != null) onPlayCardSet(playedSet);
+    }
+
+    private void OnPassButton()
+    {
+        if(onPassTurn != null) onPassTurn();
     }
 }
