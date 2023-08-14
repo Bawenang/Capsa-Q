@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardController : MonoBehaviour
 {
-    public delegate void OnChangeSelectedCards(CardElement[] selectedCards);
-    public event OnChangeSelectedCards onChangeSelectedCards;
+    public delegate void OnSelectCards(CardElement[] selectedCards);
+    public event OnSelectCards onSelectCards;
 
     public bool isShowing;
     public bool isControllable;
@@ -65,9 +66,11 @@ public class CardController : MonoBehaviour
             if(selectedCardValues.Contains(value)) {
                 selectedCardValues.Remove(value);
                 MoveDown(value);
+                DoSelectCardValues(selectedCardValues.ToArray());
             } else if(selectedCardValues.Count < 5) {
                 selectedCardValues.Add(value);
                 MoveUp(value);
+                DoSelectCardValues(selectedCardValues.ToArray());
             }
         }
     }
@@ -80,5 +83,11 @@ public class CardController : MonoBehaviour
     private void MoveDown(int cardValue)
     {
         cardGameObjectsInHand[cardValue].transform.Translate(0f, -0.2f, 0f);
+    }
+
+    private void DoSelectCardValues(int[] values)
+    {
+        var selectedCards = values.Select(value => cardsInHand[value]).ToArray();
+        if(onSelectCards != null) onSelectCards(selectedCards);
     }
 }

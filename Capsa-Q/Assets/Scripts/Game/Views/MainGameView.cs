@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainGameView : MonoBehaviour
 {
     [SerializeField] private CharacterInGame[] characters;
     [SerializeField] private CardController[] cardControllers;
     [SerializeField] private CardController playedCardController;
+    [SerializeField] private GameObject playerButtonContainer;
+    [SerializeField] private Button playSetButton;
+    [SerializeField] private Button passButton;
+
+
+    public delegate void OnSelectedCardSet(CardSet cardSet);
+    public event OnSelectedCardSet onSelectedCardSet;
 
     public void Populate(CharacterData player, CharacterData[] aiPlayer)
     {
@@ -22,6 +30,7 @@ public class MainGameView : MonoBehaviour
         var cardController = cardControllers[(int)player.Type];
         character.ChangePhoto(player.IdleSprite);
         character.ChangeName(player.CharName);
+        cardController.onSelectCards += SelectedCards;
         cardController.Populate(player.Cards.ToArray());
         cardController.isInputActive = false;
     }
@@ -71,8 +80,24 @@ public class MainGameView : MonoBehaviour
 
     }
 
+    public void ShowButtons(bool isShown)
+    {
+        playerButtonContainer.SetActive(isShown);
+    }
+
+    public void ActivatePlaySetButton(bool isActive)
+    {
+        playSetButton.gameObject.SetActive(isActive);
+    }
+
     private IEnumerator ChangePhotoAfter(CharacterInGame character, Sprite sprite, float duration) {
         yield return new WaitForSeconds(duration);
         character.ChangePhoto(sprite);
+    }
+
+    private void SelectedCards(CardElement[] cards)
+    {
+        var cardSet = CardSetFactory.Create(cards);
+        if(onSelectedCardSet != null) onSelectedCardSet(cardSet);
     }
 }

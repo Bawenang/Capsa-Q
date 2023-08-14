@@ -29,13 +29,18 @@ public class PlayerTurnState : FSM.State
         var player = props.repository.GetPlayer(playerType);
         props.mainGameView.ActivatePlayer(playerType, true);
 
-        DoAIAction(props, player);
+        PlayerAction(props, player);
     }
 
     public override void CleanUp()
     {
         var player = props.repository.GetPlayer(playerType);
         props.mainGameView.ActivatePlayer(playerType, false);
+        var aiPlayer = player as AIPlayer;
+        if(aiPlayer == null) {
+            props.mainGameView.onSelectedCardSet -= CheckValidity;
+            props.mainGameView.ShowButtons(false);
+        }
     }
 
     protected override int CheckTransition()
@@ -47,12 +52,15 @@ public class PlayerTurnState : FSM.State
     {
     }
 
-    private void DoAIAction(Properties props, Player player)
+    private void PlayerAction(Properties props, Player player)
     {
         var aiPlayer = player as AIPlayer;
 
-        if(aiPlayer != null)
-        {
+        if(aiPlayer == null) {
+            props.mainGameView.onSelectedCardSet += CheckValidity;
+            props.mainGameView.ShowButtons(true);
+            props.mainGameView.ActivatePlaySetButton(false);
+        } else {
             var playedSet = props.repository.GetTopPlayedCards();
             if(props.repository.GetTopPlayedCards().SetType == CardSetFactory.Invalid.SetType) {
                 var selectedCard = CardUtils.GetSingularCardSet(0, player.Cards.ToArray());
@@ -65,8 +73,6 @@ public class PlayerTurnState : FSM.State
                     props.mainGameView.StartCoroutine(PlayCard(selectedCard, player));
                 }
             }
-        } else {
-            props.mainGameView.StartCoroutine(PassTurn());
         }
     }
 
@@ -88,4 +94,10 @@ public class PlayerTurnState : FSM.State
         nextTransition = 0;
     }
 
+    private void CheckValidity(CardSet selectedCardSet)
+    {
+        var topPlayedCardSet = props.repository.GetTopPlayedCards();
+        var isPlaySetButtonActive = CardsComparator.IsHigherThan(selectedCardSet, topPlayedCardSet);
+        props.mainGameView.ActivatePlaySetButton(isPlaySetButtonActive);
+    }
 }

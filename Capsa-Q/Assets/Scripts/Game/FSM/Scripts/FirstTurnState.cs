@@ -27,13 +27,19 @@ public class FirstTurnState : FSM.State
         var player = props.repository.GetPlayer(playerType);
         props.mainGameView.ActivatePlayer(playerType, true);
 
-        DoAIAction(props, player);
+        PlayerAction(props, player);
     }
 
     public override void CleanUp()
     {
         var player = props.repository.GetPlayer(playerType);
         props.mainGameView.ActivatePlayer(playerType, false);
+
+        var aiPlayer = player as AIPlayer;
+        if(aiPlayer == null) {
+            props.mainGameView.onSelectedCardSet -= CheckValidity;
+            props.mainGameView.ShowButtons(false);
+        }
     }
 
     protected override int CheckTransition()
@@ -45,12 +51,15 @@ public class FirstTurnState : FSM.State
     {
     }
 
-    private void DoAIAction(Properties props, Player player)
+    private void PlayerAction(Properties props, Player player)
     {
         var aiPlayer = player as AIPlayer;
 
-        if(aiPlayer != null)
-        {
+        if(aiPlayer == null) {
+            props.mainGameView.onSelectedCardSet += CheckValidity;
+            props.mainGameView.ShowButtons(true);
+        } else {
+            props.mainGameView.ShowButtons(false);
             var selectedCard = CardUtils.GetSingularCardSet(0, aiPlayer.Cards.ToArray());
             props.mainGameView.StartCoroutine(PlayCard(selectedCard, aiPlayer));
         }
@@ -65,5 +74,12 @@ public class FirstTurnState : FSM.State
         props.mainGameView.UpdateCards(player.Type, player.Cards.ToArray());
         props.repository.lastPlaying = playerType;
         nextTransition = 0;
+    }
+
+    private void CheckValidity(CardSet selectedCardSet)
+    {
+        var topPlayedCardSet = props.repository.GetTopPlayedCards();
+        var isPlaySetButtonActive = CardsComparator.IsHigherThan(selectedCardSet, topPlayedCardSet);
+        props.mainGameView.ActivatePlaySetButton(isPlaySetButtonActive);
     }
 }
