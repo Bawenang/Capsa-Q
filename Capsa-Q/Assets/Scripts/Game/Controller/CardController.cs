@@ -30,6 +30,7 @@ public class CardController : MonoBehaviour
         }
         cardsInHand.Clear();
         cardGameObjectsInHand.Clear();
+        selectedCardValues.Clear();
     }
 
     private void AddAll(CardElement[] cards)

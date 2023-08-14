@@ -12,9 +12,18 @@ public class MainGameView : MonoBehaviour
     [SerializeField] private Button playSetButton;
     [SerializeField] private Button passButton;
 
-
     public delegate void OnSelectedCardSet(CardSet cardSet);
     public event OnSelectedCardSet onSelectedCardSet;
+
+    public delegate void OnPlayCardSet(CardSet cardSet);
+    public event OnPlayCardSet onPlayCardSet;
+
+    private CardSet playedSet;
+
+    void Awake()
+    {
+        playSetButton.onClick.AddListener(OnPlaySetButton);
+    }
 
     public void Populate(CharacterData player, CharacterData[] aiPlayer)
     {
@@ -97,7 +106,12 @@ public class MainGameView : MonoBehaviour
 
     private void SelectedCards(CardElement[] cards)
     {
-        var cardSet = CardSetFactory.Create(cards);
-        if(onSelectedCardSet != null) onSelectedCardSet(cardSet);
+        playedSet = CardSetFactory.Create(cards);
+        if(onSelectedCardSet != null) onSelectedCardSet(playedSet);
+    }
+
+    private void OnPlaySetButton()
+    {
+        if(onPlayCardSet != null) onPlayCardSet(playedSet);
     }
 }

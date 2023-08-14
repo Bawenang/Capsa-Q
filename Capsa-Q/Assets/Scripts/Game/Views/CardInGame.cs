@@ -55,6 +55,6 @@ public class CardInGame : PooledObject
     }
     public override void OnReturnedToPool()
     {
-
+        onTap = null;
     }
 }

@@ -38,6 +38,7 @@ public class FirstTurnState : FSM.State
         var aiPlayer = player as AIPlayer;
         if(aiPlayer == null) {
             props.mainGameView.onSelectedCardSet -= CheckValidity;
+            props.mainGameView.onPlayCardSet -= PlaySelectedCard;
             props.mainGameView.ShowButtons(false);
         }
     }
@@ -57,6 +58,7 @@ public class FirstTurnState : FSM.State
 
         if(aiPlayer == null) {
             props.mainGameView.onSelectedCardSet += CheckValidity;
+            props.mainGameView.onPlayCardSet += PlaySelectedCard;
             props.mainGameView.ShowButtons(true);
         } else {
             props.mainGameView.ShowButtons(false);
@@ -67,19 +69,26 @@ public class FirstTurnState : FSM.State
 
     private IEnumerator PlayCard(CardSet playSet, Player player)
     {
-        yield return new WaitForSeconds(2f);
         props.mainGameView.PlaySet(playSet);
         props.repository.AddPlayedCard(playSet);
         player.RemoveCards(playSet);
         props.mainGameView.UpdateCards(player.Type, player.Cards.ToArray());
         props.repository.lastPlaying = playerType;
+        yield return new WaitForSeconds(2f);
         nextTransition = 0;
     }
 
     private void CheckValidity(CardSet selectedCardSet)
     {
-        var topPlayedCardSet = props.repository.GetTopPlayedCards();
-        var isPlaySetButtonActive = CardsComparator.IsHigherThan(selectedCardSet, topPlayedCardSet);
+        var isPlaySetButtonActive = selectedCardSet.SetType == CardSetType.Singular &&
+                                    selectedCardSet.Cards[0].CardNumber == CardElement.Number.Three &&
+                                    selectedCardSet.Cards[0].CardSuite == CardElement.Suite.Diamond;
         props.mainGameView.ActivatePlaySetButton(isPlaySetButtonActive);
+    }
+
+    private void PlaySelectedCard(CardSet selectedCardSet)
+    {
+        var player = props.repository.GetPlayer(playerType);
+        props.mainGameView.StartCoroutine(PlayCard(selectedCardSet, player));
     }
 }
