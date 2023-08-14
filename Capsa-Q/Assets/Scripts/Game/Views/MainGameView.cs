@@ -92,6 +92,11 @@ public class MainGameView : MonoBehaviour
         playedCardController.Populate(playSet.Cards);
     }
 
+    public void ClearPlayCards()
+    {
+        playedCardController.ClearCardsInHand();
+    }
+
     public void PassTurn()
     {
         ShowPassText(true);

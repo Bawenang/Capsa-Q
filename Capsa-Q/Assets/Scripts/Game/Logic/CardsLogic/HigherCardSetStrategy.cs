@@ -13,7 +13,7 @@ public class HigherOneCardStrategy: HigherCardSetStrategy
 {
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {
-        if(cardSet.SetType != CardSetType.Singular) return Array.Empty<CardSet>();
+        if(cardSet.SetType > CardSetType.Singular) return Array.Empty<CardSet>();
         var sortedCards = cardElements;
         CardUtils.SortCardsDescending(ref sortedCards);
         var sortedSingulars = sortedCards.Select(card => CardSetFactory.Create(new CardElement[] { card } ));

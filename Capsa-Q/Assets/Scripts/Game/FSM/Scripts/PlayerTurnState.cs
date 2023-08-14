@@ -31,7 +31,11 @@ public class PlayerTurnState : FSM.State
         props.mainGameView.ShowPassText(false);
         props.mainGameView.ActivatePassButton(true);
 
-        PlayerAction(props, player);
+        if(props.repository.lastPlaying == playerType) {
+            ResetAndPlayAction(props, player);
+        } else {
+            PlayerAction(props, player);
+        }
     }
 
     public override void CleanUp()
@@ -68,16 +72,11 @@ public class PlayerTurnState : FSM.State
             props.mainGameView.ActivatePlaySetButton(false);
         } else {
             var playedSet = props.repository.GetTopPlayedCards();
-            if(props.repository.GetTopPlayedCards().SetType == CardSetFactory.Invalid.SetType) {
-                var selectedCard = CardUtils.GetSingularCardSet(0, player.Cards.ToArray());
-                props.mainGameView.StartCoroutine(PlayCard(selectedCard, player, 2f));
+            var selectedCard = aiPlayer.SelectPlayCardSet(playedSet);
+            if (selectedCard.SetType == CardSetFactory.Invalid.SetType) {
+                props.mainGameView.StartCoroutine(PassTurn(2f));
             } else {
-                var selectedCard = aiPlayer.SelectPlayCardSet(playedSet);
-                if (selectedCard.SetType == CardSetFactory.Invalid.SetType) {
-                    props.mainGameView.StartCoroutine(PassTurn(2f));
-                } else {
-                    props.mainGameView.StartCoroutine(PlayCard(selectedCard, player, 2f));
-                }
+                props.mainGameView.StartCoroutine(PlayCard(selectedCard, player, 2f));
             }
         }
     }
@@ -116,5 +115,18 @@ public class PlayerTurnState : FSM.State
     private void Pass()
     {
         props.mainGameView.StartCoroutine(PassTurn(0f));
+    }
+
+    private void ResetAndPlayAction(Properties props, Player player)
+    {
+        props.mainGameView.StartCoroutine(ResetCoroutine(props, player, 1f));
+    }
+
+    private IEnumerator ResetCoroutine(Properties props, Player player, float waitDuration)
+    {
+        yield return new WaitForSeconds(waitDuration);
+        props.repository.ResetPlayedCards();
+        props.mainGameView.ClearPlayCards();
+        PlayerAction(props, player);
     }
 }

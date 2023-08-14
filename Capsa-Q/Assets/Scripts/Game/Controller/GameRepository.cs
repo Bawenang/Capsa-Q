@@ -15,6 +15,12 @@ public class GameRepository
     {
         return players[type];
     }
+
+    public void ResetPlayedCards()
+    {
+        playedCards.Clear();
+    }
+
     public void AddPlayer(PlayerType type, Player player) 
     {
         players.Add(type, player);
