@@ -304,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShowing: 1
   isControllable: 1
+  isInputActive: 0
 --- !u!1 &60285201
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,6 +923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShowing: 0
   isControllable: 0
+  isInputActive: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,6 +1247,7 @@ MonoBehaviour:
   - {fileID: 750492408}
   - {fileID: 486641712}
   - {fileID: 1995078439}
+  playedCardController: {fileID: 1027920115}
 --- !u!114 &636875723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1380,6 +1383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShowing: 0
   isControllable: 0
+  isInputActive: 0
 --- !u!1 &921861507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1603,6 +1607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShowing: 1
   isControllable: 0
+  isInputActive: 0
 --- !u!1 &1123147778
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,6 +2854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShowing: 0
   isControllable: 0
+  isInputActive: 0
 --- !u!1 &2043959106
 GameObject:
   m_ObjectHideFlags: 0

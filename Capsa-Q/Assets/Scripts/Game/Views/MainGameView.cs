@@ -23,12 +23,16 @@ public class MainGameView : MonoBehaviour
         character.ChangePhoto(player.IdleSprite);
         character.ChangeName(player.CharName);
         cardController.Populate(player.Cards.ToArray());
+        cardController.isInputActive = false;
     }
 
     public void ActivatePlayer(PlayerType playerType, bool isPlayerTurn)
     {
         var character = characters[(int)playerType];
+        var cardController = cardControllers[(int)playerType];
+
         character.IsMyTurn = isPlayerTurn;
+        cardController.isInputActive = isPlayerTurn;
     }
 
     public void ChangePhoto(PlayerType playerType, Sprite sprite)
@@ -49,6 +53,12 @@ public class MainGameView : MonoBehaviour
     {
         var cardController = cardControllers[(int)playerType];
         cardController.Populate(cards);
+    }
+
+    public void ActivateCardInput(bool isInputActive, PlayerType playerType)
+    {
+        var cardController = cardControllers[(int)playerType];
+        cardController.isInputActive = isInputActive;
     }
 
     public void PlaySet(CardSet playSet)

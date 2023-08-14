@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class CardInGame : PooledObject, IPointerClickHandler
+public class CardInGame : PooledObject
 {
     private const int backface = -1;
     public delegate void OnTap(int value);
@@ -44,7 +44,7 @@ public class CardInGame : PooledObject, IPointerClickHandler
         IsControllable = isControllable;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnMouseUp()
     {
         if(isControllable && onTap != null) onTap(cardValue);
     }

@@ -9,8 +9,10 @@ public class CardController : MonoBehaviour
 
     public bool isShowing;
     public bool isControllable;
+    public bool isInputActive;
+
     private Dictionary<int, CardElement> cardsInHand = new Dictionary<int, CardElement>();
-    private List<CardInGame> cardGameObjectsInHand = new List<CardInGame>();
+    private Dictionary<int, CardInGame> cardGameObjectsInHand = new Dictionary<int, CardInGame>();
     private List<int> selectedCardValues = new List<int>();
 
     public void Populate(CardElement[] cards)
@@ -23,7 +25,7 @@ public class CardController : MonoBehaviour
     {
         foreach (var card in cardGameObjectsInHand)
         {
-            ObjectPoolController.Instance.Remove(card);
+            ObjectPoolController.Instance.Remove(card.Value);
         }
         cardsInHand.Clear();
         cardGameObjectsInHand.Clear();
@@ -48,7 +50,7 @@ public class CardController : MonoBehaviour
             var card = newCard.GetComponent<CardInGame>();
             card.onTap += SelectCard;
             card.Load(cardValue, isShowing, isControllable);
-            cardGameObjectsInHand.Add(card);
+            cardGameObjectsInHand.Add(cardValue, card);
         }
     }
 
@@ -59,8 +61,24 @@ public class CardController : MonoBehaviour
 
     private void SelectCard(int value)
     {
-        if(selectedCardValues.Contains(value)) return;
+        if(isControllable && isInputActive) {
+            if(selectedCardValues.Contains(value)) {
+                selectedCardValues.Remove(value);
+                MoveDown(value);
+            } else if(selectedCardValues.Count < 5) {
+                selectedCardValues.Add(value);
+                MoveUp(value);
+            }
+        }
+    }
 
-        selectedCardValues.Add(value);
+    private void MoveUp(int cardValue)
+    {
+        cardGameObjectsInHand[cardValue].transform.Translate(0f, 0.2f, 0f);
+    }
+
+    private void MoveDown(int cardValue)
+    {
+        cardGameObjectsInHand[cardValue].transform.Translate(0f, -0.2f, 0f);
     }
 }
