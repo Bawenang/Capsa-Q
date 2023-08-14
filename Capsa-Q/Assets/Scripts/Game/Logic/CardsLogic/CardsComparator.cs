@@ -9,8 +9,8 @@ public class CardsComparator
     }
 
     public static bool IsHigherThan(CardSet cardSet, CardSet comparator) {
-        int toCompareTypeRank = (int)cardSet.Type;
-        int comparatorTypeRank = (int)comparator.Type;
+        int toCompareTypeRank = (int)cardSet.SetType;
+        int comparatorTypeRank = (int)comparator.SetType;
 
         if(toCompareTypeRank > comparatorTypeRank) {
             return true;

@@ -38,7 +38,7 @@ public class CardSelectorTests
         var actualResult = sut.SelectCardSet(input, cardsToSelect);
 
         Assert.True(strategy.isGetHigherSetsCalled);
-        Assert.AreEqual(CardsType.Straight, actualResult.Type);
+        Assert.AreEqual(CardSetType.Straight, actualResult.SetType);
     }
 
     [Test]
@@ -75,7 +75,7 @@ public class CardSelectorTests
         Assert.True(strategy1.isGetHigherSetsCalled);
         Assert.True(strategy2.isGetHigherSetsCalled);
         Assert.True(strategy3.isGetHigherSetsCalled);
-        Assert.AreEqual(CardsType.Straight, actualResult.Type);
+        Assert.AreEqual(CardSetType.Straight, actualResult.SetType);
     }
 
     private CardSet CreateFullHouse() {

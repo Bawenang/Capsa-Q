@@ -54,12 +54,12 @@ public class PlayerTurnState : FSM.State
         if(aiPlayer != null)
         {
             var playedSet = props.repository.GetTopPlayedCards();
-            if(props.repository.GetTopPlayedCards().Type == CardSetFactory.Invalid.Type) {
+            if(props.repository.GetTopPlayedCards().SetType == CardSetFactory.Invalid.SetType) {
                 var selectedCard = CardUtils.GetSingularCardSet(0, player.Cards.ToArray());
                 props.mainGameView.StartCoroutine(PlayCard(selectedCard, player));
             } else {
                 var selectedCard = aiPlayer.SelectPlayCardSet(playedSet);
-                if (selectedCard.Type == CardSetFactory.Invalid.Type) {
+                if (selectedCard.SetType == CardSetFactory.Invalid.SetType) {
                     props.mainGameView.StartCoroutine(PassTurn());
                 } else {
                     props.mainGameView.StartCoroutine(PlayCard(selectedCard, player));

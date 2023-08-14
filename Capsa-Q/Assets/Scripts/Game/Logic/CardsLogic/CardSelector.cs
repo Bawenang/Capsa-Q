@@ -32,7 +32,7 @@ public class CardSelector : CardSelecting
     {
         foreach (var card in cardSet)
         {
-            if(card.Type != CardsType.Invalid) return false;
+            if(card.SetType != CardSetType.Invalid) return false;
         }
         return true;
     }

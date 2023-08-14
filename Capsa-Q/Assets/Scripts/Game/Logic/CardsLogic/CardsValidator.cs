@@ -23,11 +23,11 @@ public class CardsValidator
         this.strategies = strategies;
     }
 
-    public CardsType ValidateType(CardElement[] cards) {
+    public CardSetType ValidateType(CardElement[] cards) {
         for(int i = 0; i < strategies.Length; i++) {
             var cardsType = strategies[i].ValidateType(cards);
-            if (cardsType != CardsType.Invalid) return cardsType;
+            if (cardsType != CardSetType.Invalid) return cardsType;
         }
-        return CardsType.Invalid;
+        return CardSetType.Invalid;
     }
 }

@@ -5,59 +5,59 @@ using System.Linq;
 
 public interface CardsValidationStrategy
 {
-    CardsType ValidateType(CardElement[] cards);
+    CardSetType ValidateType(CardElement[] cards);
 }
 
 public class OneCardValidationStrategy: CardsValidationStrategy {
-    public CardsType ValidateType(CardElement[] cards) {
+    public CardSetType ValidateType(CardElement[] cards) {
         if(cards.Length == 1) {
-            return CardsType.Singular;
+            return CardSetType.Singular;
         } else {
-            return CardsType.Invalid;
+            return CardSetType.Invalid;
         }
     }
 }
 
 public class TwoCardsValidationStrategy: CardsValidationStrategy {
-    public CardsType ValidateType(CardElement[] cards) {
+    public CardSetType ValidateType(CardElement[] cards) {
         if(cards.Length == 2 && cards[0].CardNumber == cards[1].CardNumber) {
-            return CardsType.Pairs;
+            return CardSetType.Pairs;
         } else {
-            return CardsType.Invalid;
+            return CardSetType.Invalid;
         }
     }
 }
 
 public class ThreeCardsValidationStrategy: CardsValidationStrategy {
-    public CardsType ValidateType(CardElement[] cards) {
+    public CardSetType ValidateType(CardElement[] cards) {
         if(cards.Length == 3 && 
            cards[0].CardNumber == cards[1].CardNumber && 
            cards[0].CardNumber == cards[2].CardNumber) {
-            return CardsType.Triplets;
+            return CardSetType.Triplets;
         } else {
-            return CardsType.Invalid;
+            return CardSetType.Invalid;
         }
     }
 }
 
 public class StraightFlushValidationStrategy: CardsValidationStrategy {
     private CardElement[] sortedCards = new CardElement[5];
-    public CardsType ValidateType(CardElement[] cards) {
+    public CardSetType ValidateType(CardElement[] cards) {
         if(cards.Length == 5) {
             SortCards(cards);
             bool isStraight = IsStraight(sortedCards);
             bool isFlush = IsFlush(sortedCards);
             if(isStraight && isFlush) { 
-                return CardsType.StraightFlush;
+                return CardSetType.StraightFlush;
             } else if(isStraight) {
-                return CardsType.Straight;
+                return CardSetType.Straight;
             } else if(isFlush) {
-                return CardsType.Flush;
+                return CardSetType.Flush;
             } else {
-                return CardsType.Invalid;
+                return CardSetType.Invalid;
             }
         } else {
-            return CardsType.Invalid;
+            return CardSetType.Invalid;
         }
     }
 
@@ -90,21 +90,21 @@ public class StraightFlushValidationStrategy: CardsValidationStrategy {
 
 public class FivePairsCardsValidationStrategy: CardsValidationStrategy {
     private Dictionary<int, int> numberDict = new Dictionary<int, int>();
-    public CardsType ValidateType(CardElement[] cards) {
+    public CardSetType ValidateType(CardElement[] cards) {
         if(cards.Length == 5) {
             PopulateDictionary(cards);
             if(numberDict.Count != 2) {
-                return CardsType.Invalid;
+                return CardSetType.Invalid;
             }
 
             var valueArray = numberDict.Values.ToArray();
             if(valueArray[0] == 4 || valueArray[1] == 4) {
-                return CardsType.Quads;
+                return CardSetType.Quads;
             } else {
-                return CardsType.FullHouse;
+                return CardSetType.FullHouse;
             }
         } else {
-            return CardsType.Invalid;
+            return CardSetType.Invalid;
         }
     }
 

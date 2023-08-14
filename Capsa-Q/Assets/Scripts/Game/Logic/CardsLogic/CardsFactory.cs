@@ -26,8 +26,8 @@ public class CardElementFactory {
 public class CardSetFactory {
     public static CardSet Invalid = CreateInvalidImpl();
     public static CardSet Create(CardElement[] fromCards) {
-        CardsType type = CardsValidator.Instance.ValidateType(fromCards);
-        if(type == CardsType.Invalid) return CreateInvalid();
+        CardSetType type = CardsValidator.Instance.ValidateType(fromCards);
+        if(type == CardSetType.Invalid) return CreateInvalid();
         else return CreateImpl(fromCards, type);
     }
 
@@ -37,17 +37,17 @@ public class CardSetFactory {
 
     private static CardSet CreateInvalidImpl() {
         CardElement invalidCard = CardElementFactory.Create(CardElement.Number.Unknown, CardElement.Suite.Unknown);
-        CardSet invalidSet = new CardSet(CardsType.Invalid,
+        CardSet invalidSet = new CardSet(CardSetType.Invalid,
                                          Array.Empty<CardElement>(),
                                          invalidCard);
         return invalidSet;
     }
 
-    private static CardSet CreateImpl(CardElement[] fromCards, CardsType type) {
+    private static CardSet CreateImpl(CardElement[] fromCards, CardSetType setType) {
         CardElement[] sortedCards = fromCards;
         CardUtils.SortCardsDescending(ref sortedCards);
         CardElement highest = sortedCards[0];
-        CardSet cardSet = new CardSet(type, sortedCards, highest);
+        CardSet cardSet = new CardSet(setType, sortedCards, highest);
         return cardSet;
     }
 }

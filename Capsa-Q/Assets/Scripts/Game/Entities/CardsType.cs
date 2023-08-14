@@ -1,4 +1,4 @@
-public enum CardsType
+public enum CardSetType
 {
     Invalid,
     Singular,
