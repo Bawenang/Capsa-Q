@@ -42,18 +42,19 @@ public class ObjectPoolController : MonoBehaviour
         if(!objectPools.ContainsKey(typeof(T))) {
             return null;
         }
+        var pooledObject = objectPools[typeof(T)].Instantiate(position, rotation);
+        pooledObject.OnRetrievedFromPool();
 
-        return objectPools[typeof(T)].Instantiate(position, rotation);
+        return pooledObject;
     }
 
     public void Remove<T>(T pooledObject)
     {
-        Debug.Log(">>>>> Type = " + typeof(T));
         var pooledObjectToRemove = pooledObject as PooledObject;
         if(pooledObjectToRemove != null && !objectPools.ContainsKey(typeof(T))) {
             return;
         }
-
+        pooledObjectToRemove.OnReturnedToPool();
         objectPools[typeof(T)].Remove(pooledObjectToRemove);
     }
 
