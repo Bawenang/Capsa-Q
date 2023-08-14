@@ -28,6 +28,11 @@ public class GameStateController : FSM.StateController
             props.mainGameView = mainGameView;
             props.repository = repository;
             state.Setup(props);
+        } else if(state is WinState) {
+            var props = new WinState.Properties();
+            props.mainGameView = mainGameView;
+            props.repository = repository;
+            state.Setup(props);
         }
     }
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameRepository
 {
     public PlayerType lastPlaying = PlayerType.Unknown;
+    public PlayerType winner = PlayerType.Unknown;
     public CardSet[] PlayedCards { get => playedCards.ToArray(); }
 
     private Dictionary<PlayerType, Player> players = new Dictionary<PlayerType, Player>();

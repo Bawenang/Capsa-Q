@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ef16b017143c45aab2f5701877539df, type: 3}
-  m_Name: Player_4_TurnState
+  m_Script: {fileID: 11500000, guid: 16eb565ce7e1844af9c94ff2584a1cf5, type: 3}
+  m_Name: WinState
   m_EditorClassIdentifier: 
-  transitionList:
-  - {fileID: 11400000, guid: 0c55eb010f78846dd9b46f5e864bb138, type: 2}
-  - {fileID: 11400000, guid: 47fea1ed1b8ca4091b0c74fc1c414446, type: 2}
-  playerType: 3
+  transitionList: []

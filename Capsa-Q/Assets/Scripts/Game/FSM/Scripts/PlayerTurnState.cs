@@ -89,7 +89,12 @@ public class PlayerTurnState : FSM.State
         player.RemoveCards(playSet);
         props.mainGameView.UpdateCards(player.Type, player.Cards.ToArray());
         props.repository.lastPlaying = playerType;
-        nextTransition = 0;
+        if(player.Cards.Count == 0) {
+            props.repository.winner = player.Type;
+            nextTransition = 1;
+        } else {
+            nextTransition = 0;
+        }
     }
 
     private IEnumerator PassTurn(float waitDuration)

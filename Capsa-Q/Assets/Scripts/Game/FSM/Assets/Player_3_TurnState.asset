@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionList:
   - {fileID: 11400000, guid: c0c903f6d5d7a4787a110e26d39c9144, type: 2}
+  - {fileID: 11400000, guid: 47fea1ed1b8ca4091b0c74fc1c414446, type: 2}
   playerType: 2

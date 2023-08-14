@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ef16b017143c45aab2f5701877539df, type: 3}
-  m_Name: Player_4_TurnState
+  m_Script: {fileID: 11500000, guid: ff6fd6a95c2644907ad292de9e0087ee, type: 3}
+  m_Name: GameResultTransition
   m_EditorClassIdentifier: 
-  transitionList:
-  - {fileID: 11400000, guid: 0c55eb010f78846dd9b46f5e864bb138, type: 2}
-  - {fileID: 11400000, guid: 47fea1ed1b8ca4091b0c74fc1c414446, type: 2}
-  playerType: 3
+  fromState: {fileID: 0}
+  endState: {fileID: 11400000, guid: 29695679f516c42b69c75901fba17353, type: 2}
+  timeout: 0
