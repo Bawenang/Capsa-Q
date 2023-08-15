@@ -47,6 +47,7 @@ public class MainmenuSceneController : MonoBehaviour
 
     private void BeginGame(CharacterData selectedChar)
     {
+        GameSceneController.selectedCharacter = selectedChar;
         mainHUD.FadeOutOfScene(LoadGameScene);
     }
 

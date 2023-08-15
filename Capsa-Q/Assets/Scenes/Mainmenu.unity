@@ -1668,7 +1668,7 @@ Sprite:
     9b91e23040e8c4730b788a23fb08326c: 21300000
   m_AtlasTags:
   - Mainmenu
-  m_SpriteAtlas: {fileID: 0}
+  m_SpriteAtlas: {fileID: 4343727234628468602, guid: a2a4abf1a05184ad29fd3f8146156c36, type: 2}
   m_RD:
     serializedVersion: 3
     texture: {fileID: 2800000, guid: 9b91e23040e8c4730b788a23fb08326c, type: 3}
@@ -1762,7 +1762,7 @@ Sprite:
     downscaleMultiplier: 1
   m_AtlasRD:
     serializedVersion: 3
-    texture: {fileID: 0}
+    texture: {fileID: 2, guid: 00000000000000000000000000000000, type: 0}
     alphaTexture: {fileID: 0}
     secondaryTextures: []
     m_SubMeshes:
@@ -1847,8 +1847,8 @@ Sprite:
       width: 1024
       height: 576
     textureRectOffset: {x: 0, y: 0}
-    atlasRectOffset: {x: -1, y: -1}
-    settingsRaw: 64
+    atlasRectOffset: {x: 0, y: 0}
+    settingsRaw: 65
     uvTransform: {x: 100, y: 512, z: 100, w: 288}
     downscaleMultiplier: 1
   m_PhysicsShape:
@@ -3327,7 +3327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1612405785
 Transform:
   m_ObjectHideFlags: 0
@@ -3453,7 +3453,7 @@ Sprite:
     52576c73209c04571bc859a118453db2: 21300000
   m_AtlasTags:
   - Mainmenu
-  m_SpriteAtlas: {fileID: 0}
+  m_SpriteAtlas: {fileID: 4343727234628468602, guid: a2a4abf1a05184ad29fd3f8146156c36, type: 2}
   m_RD:
     serializedVersion: 3
     texture: {fileID: 2800000, guid: 52576c73209c04571bc859a118453db2, type: 3}
@@ -3547,7 +3547,7 @@ Sprite:
     downscaleMultiplier: 1
   m_AtlasRD:
     serializedVersion: 3
-    texture: {fileID: 0}
+    texture: {fileID: 2, guid: 00000000000000000000000000000000, type: 0}
     alphaTexture: {fileID: 0}
     secondaryTextures: []
     m_SubMeshes:
@@ -3628,13 +3628,13 @@ Sprite:
     textureRect:
       serializedVersion: 2
       x: 0
-      y: 0
+      y: 578
       width: 1024
       height: 576
     textureRectOffset: {x: 0, y: 0}
-    atlasRectOffset: {x: -1, y: -1}
-    settingsRaw: 64
-    uvTransform: {x: 100, y: 512, z: 100, w: 288}
+    atlasRectOffset: {x: 0, y: 578}
+    settingsRaw: 65
+    uvTransform: {x: 100, y: 512, z: 100, w: 866}
     downscaleMultiplier: 1
   m_PhysicsShape:
   - - {x: -5.12, y: 2.8799999}
