@@ -16,6 +16,7 @@ public class GamePreparationState : FSM.State
     }
 
     private Properties properties;
+    private CardElement[][] dealtCards;
     private int nextTransition = -1;
     public override void CleanUp()
     {
@@ -31,7 +32,7 @@ public class GamePreparationState : FSM.State
         
         var aiCharacters = CreateAICharacterData(props.selectedCharacter, props.allCharacters);
         var shuffler = new CardShuffler();
-        var dealtCards = shuffler.ShuffleAndDeal();
+        dealtCards = shuffler.ShuffleAndDeal();
 
         var cardSelector = CreateCardSelector();
 
@@ -64,11 +65,7 @@ public class GamePreparationState : FSM.State
         props.mainGameView.InitiatePlayer(aiPlayer2);
         props.mainGameView.InitiatePlayer(aiPlayer3);
 
-        for(int i = 0; i < dealtCards.Length; i++) {
-            if(Array.Exists(dealtCards[i], card => card.CardValue == 0)) {
-                nextTransition = i;
-            }
-        }
+        props.mainGameView.StartCoroutine(StartGame(1.2f));
     }
 
     protected override int CheckTransition()
@@ -118,4 +115,15 @@ public class GamePreparationState : FSM.State
         var cardSelector = new CardSelector(strategies: strategies);
         return cardSelector;
     }
+
+    private IEnumerator StartGame(float waitDuration)
+    {
+        yield return new WaitForSeconds(waitDuration);
+        for(int i = 0; i < dealtCards.Length; i++) {
+            if(Array.Exists(dealtCards[i], card => card.CardValue == 0)) {
+                nextTransition = i;
+            }
+        }
+    }
+
 }

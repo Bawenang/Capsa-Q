@@ -9,6 +9,7 @@ public class GameSceneController : MonoBehaviour
     [SerializeField] private CharacterData[] allCharacters;
     [SerializeField] private MainGameView mainGameView;
     [SerializeField] private GameStateController stateController;
+    [SerializeField] private MainHUD mainHUD;
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +19,7 @@ public class GameSceneController : MonoBehaviour
         stateController.selectedCharacter = selectedCharacter;
         stateController.allCharacters = allCharacters;
         stateController.mainGameView = mainGameView;
-
         stateController.StartManually();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        mainHUD.FadeIntoScene();
     }
 }
