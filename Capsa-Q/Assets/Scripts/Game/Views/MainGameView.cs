@@ -43,7 +43,7 @@ public class MainGameView : MonoBehaviour
         }
     }
 
-    public void InitiatePlayer(Player player)
+    public void InitiatePlayer(IPlayer player)
     {
         var character = characters[(int)player.Type];
         var cardController = cardControllers[(int)player.Type];
@@ -130,7 +130,8 @@ public class MainGameView : MonoBehaviour
         congratulationDialog.gameObject.SetActive(true);
     }
 
-    private IEnumerator ChangePhotoAfter(CharacterInGame character, Sprite sprite, float duration) {
+    private IEnumerator ChangePhotoAfter(CharacterInGame character, Sprite sprite, float duration) 
+    {
         yield return new WaitForSeconds(duration);
         character.ChangePhoto(sprite);
     }

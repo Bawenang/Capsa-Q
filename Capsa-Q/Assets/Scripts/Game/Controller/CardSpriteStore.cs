@@ -10,7 +10,8 @@ public class CardSpriteStore : MonoBehaviour
         }
     }
 
-    public static void DestroyInstance() {
+    public static void DestroyInstance() 
+    {
         if (instance == null) return;
         DestroyImmediate(instance.gameObject);
         instance = null;

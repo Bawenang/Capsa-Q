@@ -9,10 +9,10 @@ public class GameRepository
     public PlayerType winner = PlayerType.Unknown;
     public CardSet[] PlayedCards { get => playedCards.ToArray(); }
 
-    private Dictionary<PlayerType, Player> players = new Dictionary<PlayerType, Player>();
+    private Dictionary<PlayerType, IPlayer> players = new Dictionary<PlayerType, IPlayer>();
     private List<CardSet> playedCards = new List<CardSet>();
 
-    public Player GetPlayer(PlayerType type) 
+    public IPlayer GetPlayer(PlayerType type) 
     {
         return players[type];
     }
@@ -22,7 +22,7 @@ public class GameRepository
         playedCards.Clear();
     }
 
-    public void AddPlayer(PlayerType type, Player player) 
+    public void AddPlayer(PlayerType type, IPlayer player) 
     {
         players.Add(type, player);
     }

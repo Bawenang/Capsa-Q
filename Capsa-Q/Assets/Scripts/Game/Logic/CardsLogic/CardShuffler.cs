@@ -2,19 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public interface CardShuffling {
+public interface ICardShuffler 
+{
     CardElement[][] ShuffleAndDeal();
 }
 
-public class CardShuffler : CardShuffling
+public class CardShuffler : ICardShuffler
 {
     private CardElement[] deck;
-    public CardShuffler() {
+    public CardShuffler() 
+    {
         var cardNumbers = Enumerable.Range(0, 52).ToArray();
         deck = cardNumbers.Select(value => CardElementFactory.Create(value)).ToArray();
     }
 
-    public CardElement[][] ShuffleAndDeal() {
+    public CardElement[][] ShuffleAndDeal() 
+    {
         var shuffledDeck = Shuffle(deck);
         List<CardElement> cardsPlayer1 = new List<CardElement>();
         List<CardElement> cardsPlayer2 = new List<CardElement>();
@@ -55,7 +58,8 @@ public class CardShuffler : CardShuffling
         return shuffled.ToArray();
     }
 
-    private CardElement[] SortedCards(List<CardElement> cardList) {
+    private CardElement[] SortedCards(List<CardElement> cardList) 
+    {
         CardElement[] cards = cardList.ToArray();
         CardUtils.SortCardsDescending(ref cards);
         return cards;

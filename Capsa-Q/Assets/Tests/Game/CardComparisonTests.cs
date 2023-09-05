@@ -88,7 +88,8 @@ public class CardComparisonTests
         Assert.False(CardsComparator.IsHigherThan(singular, pairs));
     }
 
-    private CardSet CreateStraightFlush() {
+    private CardSet CreateStraightFlush() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Diamond),
                                 CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Diamond),
@@ -97,7 +98,8 @@ public class CardComparisonTests
         return CardSetFactory.Create(cards);
     }
 
-    private CardSet CreateQuads() {
+    private CardSet CreateQuads() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Club),
                                 CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade),
@@ -106,7 +108,8 @@ public class CardComparisonTests
         return CardSetFactory.Create(cards);
     }
 
-    private CardSet CreateFullHouse() {
+    private CardSet CreateFullHouse() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Club),
                                 CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade),
@@ -115,7 +118,8 @@ public class CardComparisonTests
         return CardSetFactory.Create(cards);
     }
 
-    private CardSet CreateFlush() {
+    private CardSet CreateFlush() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Jack, CardElement.Suite.Diamond),
                                 CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Diamond),
@@ -124,7 +128,8 @@ public class CardComparisonTests
         return CardSetFactory.Create(cards);
     }
 
-    private CardSet CreateStraight() {
+    private CardSet CreateStraight() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Spade),
                                 CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Diamond),
@@ -133,20 +138,23 @@ public class CardComparisonTests
         return CardSetFactory.Create(cards);
     }
 
-    private CardSet CreateTriplets() {
+    private CardSet CreateTriplets() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Club),
                                 CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade) };
         return CardSetFactory.Create(cards);
     }
 
-    private CardSet CreatePairs() {
+    private CardSet CreatePairs() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Club) };
         return CardSetFactory.Create(cards);
     }
 
-    private CardSet CreateSingular() {
+    private CardSet CreateSingular() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond) };
         return CardSetFactory.Create(cards);
     }

@@ -54,7 +54,7 @@ public class FirstTurnState : FSM.State
     {
     }
 
-    private void PlayerAction(Properties props, Player player)
+    private void PlayerAction(Properties props, IPlayer player)
     {
         var aiPlayer = player as AIPlayer;
 
@@ -69,7 +69,7 @@ public class FirstTurnState : FSM.State
         }
     }
 
-    private IEnumerator PlayCard(CardSet playSet, Player player, float waitDuration)
+    private IEnumerator PlayCard(CardSet playSet, IPlayer player, float waitDuration)
     {
         yield return new WaitForSeconds(waitDuration);
         props.mainGameView.PlaySet(playSet);

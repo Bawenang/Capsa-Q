@@ -60,7 +60,7 @@ public class PlayerTurnState : FSM.State
     {
     }
 
-    private void PlayerAction(Properties props, Player player)
+    private void PlayerAction(Properties props, IPlayer player)
     {
         var aiPlayer = player as AIPlayer;
 
@@ -81,7 +81,7 @@ public class PlayerTurnState : FSM.State
         }
     }
 
-    private IEnumerator PlayCard(CardSet playSet, Player player, float waitDuration)
+    private IEnumerator PlayCard(CardSet playSet, IPlayer player, float waitDuration)
     {
         yield return new WaitForSeconds(waitDuration);
         props.mainGameView.PlaySet(playSet);
@@ -122,12 +122,12 @@ public class PlayerTurnState : FSM.State
         props.mainGameView.StartCoroutine(PassTurn(0f));
     }
 
-    private void ResetAndPlayAction(Properties props, Player player)
+    private void ResetAndPlayAction(Properties props, IPlayer player)
     {
         props.mainGameView.StartCoroutine(ResetCoroutine(props, player, 1f));
     }
 
-    private IEnumerator ResetCoroutine(Properties props, Player player, float waitDuration)
+    private IEnumerator ResetCoroutine(Properties props, IPlayer player, float waitDuration)
     {
         yield return new WaitForSeconds(waitDuration);
         props.repository.ResetPlayedCards();

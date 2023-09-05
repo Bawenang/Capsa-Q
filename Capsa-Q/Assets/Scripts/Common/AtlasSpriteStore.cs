@@ -5,13 +5,15 @@ using UnityEngine.U2D;
 
 public class AtlasSpriteStore : MonoBehaviour
 {
-    public static AtlasSpriteStore Instance { 
+    public static AtlasSpriteStore Instance 
+    { 
         get {
             return instance;
         }
     }
 
-    public static void DestroyInstance() {
+    public static void DestroyInstance() 
+    {
         if (instance == null) return;
         DestroyImmediate(instance.gameObject);
         instance = null;
@@ -58,7 +60,8 @@ public class AtlasSpriteStore : MonoBehaviour
         return spriteDict[key];
     }
 
-    private Sprite GetFromAtlasList(string key) {
+    private Sprite GetFromAtlasList(string key) 
+    {
         for(int i = 0; i < atlasList.Count; i++) {
             Sprite sprite = atlasList[i].GetSprite(key);
             if(sprite != null) return sprite;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface StateStartDelegate
+public interface IStateStartDelegate
 {
-    void onStart();
+    void OnStart();
 }

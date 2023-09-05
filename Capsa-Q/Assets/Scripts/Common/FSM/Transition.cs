@@ -11,11 +11,13 @@ namespace FSM
         [SerializeField] protected State endState;
         [SerializeField] protected float timeout;
 
-        public void Start() {
+        public void Start() 
+        {
             OnEnter();
         }
 
-        public void OnUpdate() {
+        public void OnUpdate() 
+        {
             RunUpdate();
             if (!CheckTransitionFinished()) {
                 return;
@@ -26,11 +28,13 @@ namespace FSM
                 onEndCallback(this, endState);
         }
 
-        public void SetEndCallback(EndTransitionCallback callback) {
+        public void SetEndCallback(EndTransitionCallback callback) 
+        {
             onEndCallback = callback;
         }
 
-        public void ClearEndCallback() {
+        public void ClearEndCallback() 
+        {
             onEndCallback = null;
         }
 
@@ -43,7 +47,8 @@ namespace FSM
         public abstract void OnEnter();
         public abstract void OnExit();
 
-        private void End() {
+        private void End() 
+        {
             OnExit();
         }
     }

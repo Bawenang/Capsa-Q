@@ -10,7 +10,8 @@ public class MainmenuSceneController : MonoBehaviour
     [SerializeField] private CharacterSelectionView characterSelectionView;
     [SerializeField] private CharacterData[] characters;
 
-    private void OnEnable() {
+    private void OnEnable() 
+    {
         openingMenuView.onPlayButton += SelectCharacter;
         characterSelectionView.onBeginButton += BeginGame;
     }

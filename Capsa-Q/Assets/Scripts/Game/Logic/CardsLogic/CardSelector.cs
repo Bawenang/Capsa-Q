@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface CardSelecting
+public interface ICardSelector
 {
     CardSet SelectCardSet(CardSet cardSet, CardElement[] cardElements);
 }
 
-public class CardSelector : CardSelecting
+public class CardSelector : ICardSelector
 {
-    private HigherCardSetStrategy[] strategies;
+    private IHigherCardSetStrategy[] strategies;
 
-    public CardSelector(HigherCardSetStrategy[] strategies)
+    public CardSelector(IHigherCardSetStrategy[] strategies)
     {
         this.strategies = strategies;
     }

@@ -33,7 +33,7 @@ public class CardSelectorTests
             CreateFlush()
         };
         var strategy = new MockHigherCardsStrategy(getHigherSetsReturnValue: mockedReturnValues);
-        var sut = new CardSelector(new HigherCardSetStrategy[] { strategy });
+        var sut = new CardSelector(new IHigherCardSetStrategy[] { strategy });
 
         var actualResult = sut.SelectCardSet(input, cardsToSelect);
 
@@ -68,7 +68,7 @@ public class CardSelectorTests
             CreateFlush()
         };
         var strategy3 = new MockHigherCardsStrategy(mockedReturnValues);
-        var sut = new CardSelector(new HigherCardSetStrategy[] { strategy1, strategy2, strategy3 });
+        var sut = new CardSelector(new IHigherCardSetStrategy[] { strategy1, strategy2, strategy3 });
 
         var actualResult = sut.SelectCardSet(input, cardsToSelect);
 
@@ -78,7 +78,8 @@ public class CardSelectorTests
         Assert.AreEqual(CardSetType.Straight, actualResult.SetType);
     }
 
-    private CardSet CreateFullHouse() {
+    private CardSet CreateFullHouse() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Club),
                                 CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Spade),
@@ -87,7 +88,8 @@ public class CardSelectorTests
         return CardSetFactory.Create(cards);
     }
 
-    private CardSet CreateFlush() {
+    private CardSet CreateFlush() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Jack, CardElement.Suite.Diamond),
                                 CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Diamond),
@@ -96,7 +98,8 @@ public class CardSelectorTests
         return CardSetFactory.Create(cards);
     }
 
-    private CardSet CreateStraight() {
+    private CardSet CreateStraight() 
+    {
         CardElement[] cards = { CardElementFactory.Create(CardElement.Number.Three, CardElement.Suite.Diamond), 
                                 CardElementFactory.Create(CardElement.Number.Six, CardElement.Suite.Spade),
                                 CardElementFactory.Create(CardElement.Number.Five, CardElement.Suite.Diamond),
@@ -107,7 +110,7 @@ public class CardSelectorTests
 
 }
 
-public class MockHigherCardsStrategy: HigherCardSetStrategy
+public class MockHigherCardsStrategy: IHigherCardSetStrategy
 {
     public bool isGetHigherSetsCalled = false;
     private CardSet[] getHigherSetsReturnValue;

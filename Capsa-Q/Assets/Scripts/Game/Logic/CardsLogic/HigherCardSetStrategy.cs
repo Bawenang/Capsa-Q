@@ -3,13 +3,13 @@ using System.Linq;
 using System;
 using UnityEngine;
 
-public interface HigherCardSetStrategy
+public interface IHigherCardSetStrategy
 {
     CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements);
     
 }
 
-public class HigherOneCardStrategy: HigherCardSetStrategy
+public class HigherOneCardStrategy: IHigherCardSetStrategy
 {
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {
@@ -28,7 +28,7 @@ public class HigherOneCardStrategy: HigherCardSetStrategy
     }
 }
 
-public class HigherTwoCardsStrategy: HigherCardSetStrategy
+public class HigherTwoCardsStrategy: IHigherCardSetStrategy
 {
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {
@@ -47,7 +47,7 @@ public class HigherTwoCardsStrategy: HigherCardSetStrategy
     }
 }
 
-public class HigherThreeCardsStrategy: HigherCardSetStrategy
+public class HigherThreeCardsStrategy: IHigherCardSetStrategy
 {
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {
@@ -66,7 +66,7 @@ public class HigherThreeCardsStrategy: HigherCardSetStrategy
     }
 }
 
-public class HigherFiveCardsStrategy: HigherCardSetStrategy
+public class HigherFiveCardsStrategy: IHigherCardSetStrategy
 {
     public CardSet[] GetHigherSets(CardSet cardSet, CardElement[] cardElements)
     {

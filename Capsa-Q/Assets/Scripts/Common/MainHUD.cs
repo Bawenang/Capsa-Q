@@ -14,7 +14,8 @@ public class MainHUD : MonoBehaviour
     private event OnFinishFadingIntoScene onFinishFadingIntoScene;
     private event OnFinishFadingOutOfScene onFinishFadingOutOfScene;
 
-    public void FadeIntoScene(OnFinishFadingIntoScene completion = null) {
+    public void FadeIntoScene(OnFinishFadingIntoScene completion = null) 
+    {
         onFinishFadingIntoScene = completion;
         fadingImage.color = Color.black;
         fadingImage.gameObject.SetActive(true);
@@ -22,7 +23,8 @@ public class MainHUD : MonoBehaviour
         StartCoroutine(FadeIntoSceneFinished());
     }
 
-    public void FadeOutOfScene(OnFinishFadingOutOfScene completion = null) {
+    public void FadeOutOfScene(OnFinishFadingOutOfScene completion = null) 
+    {
         onFinishFadingOutOfScene = completion;
         fadingImage.color = Color.clear;
         fadingImage.gameObject.SetActive(true);
@@ -30,16 +32,19 @@ public class MainHUD : MonoBehaviour
         StartCoroutine(FadeOutOfSceneFinished());
     }
 
-    public void FadeOutIn(OnFinishFadingOutOfScene completion = null) {
+    public void FadeOutIn(OnFinishFadingOutOfScene completion = null) 
+    {
         FadeOutOfScene(FadeInAfterwards);
         onFinishFadingOutOfScene += completion;
     }
 
-    private void FadeInAfterwards() {
+    private void FadeInAfterwards() 
+    {
         FadeIntoScene();
     }
 
-    private IEnumerator FadeIntoSceneFinished() {
+    private IEnumerator FadeIntoSceneFinished() 
+    {
         yield return new WaitForSeconds(1.2f);
         fadingImageAnimator.gameObject.SetActive(false);
         if (onFinishFadingIntoScene != null) {
@@ -48,7 +53,8 @@ public class MainHUD : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeOutOfSceneFinished() {
+    private IEnumerator FadeOutOfSceneFinished() 
+    {
         yield return new WaitForSeconds(1.2f);
         if (onFinishFadingOutOfScene != null) {
             onFinishFadingOutOfScene();

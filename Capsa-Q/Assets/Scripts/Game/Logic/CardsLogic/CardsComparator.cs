@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CardsComparator
 {
-    public static bool IsHigherThan(CardElement element, CardElement comparator) {
+    public static bool IsHigherThan(CardElement element, CardElement comparator) 
+    {
         return element.CardValue > comparator.CardValue;
     }
 
-    public static bool IsHigherThan(CardSet cardSet, CardSet comparator) {
+    public static bool IsHigherThan(CardSet cardSet, CardSet comparator) 
+    {
         int toCompareTypeRank = (int)cardSet.SetType;
         int comparatorTypeRank = (int)comparator.SetType;
 

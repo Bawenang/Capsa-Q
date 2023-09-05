@@ -36,7 +36,8 @@ public struct CardElement
     private Suite suite;
     private int value;
 
-    public CardElement(Number number, Suite suite, int value) {
+    public CardElement(Number number, Suite suite, int value) 
+    {
         this.number = number;
         this.suite = suite;
         this.value = value;

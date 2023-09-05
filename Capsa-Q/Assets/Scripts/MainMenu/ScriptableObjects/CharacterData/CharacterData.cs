@@ -8,7 +8,8 @@ public class CharacterData : ScriptableObject
 {
     public string charName;
 
-    public string GetSpriteName(SpriteState state) {
+    public string GetSpriteName(SpriteState state) 
+    {
         switch (state)
         {
             case SpriteState.Idle: return charName + "_idle";
@@ -19,7 +20,8 @@ public class CharacterData : ScriptableObject
         }
     }
 
-    public Sprite GetSprite(SpriteState state) {
+    public Sprite GetSprite(SpriteState state) 
+    {
         var spriteName = GetSpriteName(state);
         return AtlasSpriteStore.Instance.GetSprite(spriteName);
     }

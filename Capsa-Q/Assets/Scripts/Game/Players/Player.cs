@@ -11,7 +11,7 @@ public enum PlayerType
     Player4 = 3
 }
 
-public interface Player
+public interface IPlayer
 {
     PlayerType Type { get; }
     string CharName { get; }
@@ -23,7 +23,7 @@ public interface Player
     void RemoveCards(CardSet inCardSet);
 }
 
-public class BasePlayer: Player
+public class BasePlayer: IPlayer
 {
     public PlayerType Type { get => type; }
     public string CharName { get => charName; }
@@ -37,7 +37,8 @@ public class BasePlayer: Player
     protected Dictionary<SpriteState, Sprite> sprites = new Dictionary<SpriteState, Sprite>();
     protected List<CardElement> cards = new List<CardElement>();
 
-    public BasePlayer(PlayerType type, CharacterData character, CardElement[] cards) {
+    public BasePlayer(PlayerType type, CharacterData character, CardElement[] cards) 
+    {
         this.type = type;
         sprites.Add(SpriteState.Idle, character.GetSprite(SpriteState.Idle));
         sprites.Add(SpriteState.Play, character.GetSprite(SpriteState.Play));

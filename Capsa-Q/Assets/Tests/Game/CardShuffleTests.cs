@@ -20,7 +20,8 @@ public class CardShuffleTests
         AssertPlayerCards(actualShuffledCards[3]);
     }
 
-    private void AssertPlayerCards(CardElement[] actualCards) {
+    private void AssertPlayerCards(CardElement[] actualCards) 
+    {
         Assert.AreEqual(13, actualCards.Length);
 
         for(int i = 0; i<actualCards.Length-1; i++) {

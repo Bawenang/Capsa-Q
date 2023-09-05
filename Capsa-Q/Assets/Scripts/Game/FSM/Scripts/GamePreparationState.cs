@@ -100,13 +100,13 @@ public class GamePreparationState : FSM.State
         return charList.Take(3).ToArray();
     }
 
-    private CardSelecting CreateCardSelector()
+    private ICardSelector CreateCardSelector()
     {
         var oneCardStrategy = new HigherOneCardStrategy();
         var twoCardStrategy = new HigherTwoCardsStrategy();
         var threeCardStrategy = new HigherThreeCardsStrategy();
         var fiveCardStrategy = new HigherFiveCardsStrategy();
-        var strategies = new HigherCardSetStrategy[] {
+        var strategies = new IHigherCardSetStrategy[] {
             oneCardStrategy,
             twoCardStrategy,
             threeCardStrategy,

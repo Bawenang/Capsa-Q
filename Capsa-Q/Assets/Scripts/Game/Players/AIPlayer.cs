@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AIPlayer : BasePlayer
 {
-    private CardSelecting selector;
+    private ICardSelector selector;
     public AIPlayer(PlayerType type, CharacterData character, CardElement[] cards,
-                    CardSelecting selector) : 
+                    ICardSelector selector) : 
             base(type, character, cards) 
     {
         this.selector = selector;

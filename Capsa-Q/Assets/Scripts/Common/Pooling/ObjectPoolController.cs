@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class ObjectPoolController : MonoBehaviour
 {
-    public static ObjectPoolController Instance { 
+    public static ObjectPoolController Instance 
+    { 
         get {
             return instance;
         }
     }
 
-    public static void DestroyInstance() {
+    public static void DestroyInstance() 
+    {
         if (instance == null) return;
         DestroyImmediate(instance.gameObject);
         instance = null;

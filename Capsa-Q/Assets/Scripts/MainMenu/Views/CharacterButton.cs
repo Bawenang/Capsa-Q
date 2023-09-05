@@ -13,13 +13,15 @@ public class CharacterButton : MonoBehaviour
     public delegate void OnSelected(int index);
     public event OnSelected onSelected;
 
-    public void Populate(Sprite photo, string name, int index) {
+    public void Populate(Sprite photo, string name, int index) 
+    {
         this.photoImage.sprite = photo;
         this.nameText.text = name;
         this.index = index;
     }
 
-    public void Select() {
+    public void Select() 
+    {
         toggle.isOn = true;
     }
     private void Awake() 
@@ -38,7 +40,8 @@ public class CharacterButton : MonoBehaviour
         
     }
 
-    private void ValueChanged(bool isOn) {
+    private void ValueChanged(bool isOn) 
+    {
         if(isOn && onSelected != null) onSelected(this.index);
     }
 }

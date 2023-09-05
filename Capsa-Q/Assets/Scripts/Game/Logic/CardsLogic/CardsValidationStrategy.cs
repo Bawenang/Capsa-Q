@@ -3,13 +3,15 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public interface CardsValidationStrategy
+public interface ICardsValidationStrategy
 {
     CardSetType ValidateType(CardElement[] cards);
 }
 
-public class OneCardValidationStrategy: CardsValidationStrategy {
-    public CardSetType ValidateType(CardElement[] cards) {
+public class OneCardValidationStrategy: ICardsValidationStrategy 
+{
+    public CardSetType ValidateType(CardElement[] cards) 
+    {
         if(cards.Length == 1) {
             return CardSetType.Singular;
         } else {
@@ -18,8 +20,10 @@ public class OneCardValidationStrategy: CardsValidationStrategy {
     }
 }
 
-public class TwoCardsValidationStrategy: CardsValidationStrategy {
-    public CardSetType ValidateType(CardElement[] cards) {
+public class TwoCardsValidationStrategy: ICardsValidationStrategy 
+{
+    public CardSetType ValidateType(CardElement[] cards) 
+    {
         if(cards.Length == 2 && cards[0].CardNumber == cards[1].CardNumber) {
             return CardSetType.Pairs;
         } else {
@@ -28,8 +32,10 @@ public class TwoCardsValidationStrategy: CardsValidationStrategy {
     }
 }
 
-public class ThreeCardsValidationStrategy: CardsValidationStrategy {
-    public CardSetType ValidateType(CardElement[] cards) {
+public class ThreeCardsValidationStrategy: ICardsValidationStrategy 
+{
+    public CardSetType ValidateType(CardElement[] cards) 
+    {
         if(cards.Length == 3 && 
            cards[0].CardNumber == cards[1].CardNumber && 
            cards[0].CardNumber == cards[2].CardNumber) {
@@ -40,9 +46,11 @@ public class ThreeCardsValidationStrategy: CardsValidationStrategy {
     }
 }
 
-public class StraightFlushValidationStrategy: CardsValidationStrategy {
+public class StraightFlushValidationStrategy: ICardsValidationStrategy 
+{
     private CardElement[] sortedCards = new CardElement[5];
-    public CardSetType ValidateType(CardElement[] cards) {
+    public CardSetType ValidateType(CardElement[] cards) 
+    {
         if(cards.Length == 5) {
             SortCards(cards);
             bool isStraight = IsStraight(sortedCards);
@@ -61,36 +69,43 @@ public class StraightFlushValidationStrategy: CardsValidationStrategy {
         }
     }
 
-    private void SortCards(CardElement[] cards) {
+    private void SortCards(CardElement[] cards) 
+    {
         sortedCards = cards;
         CardUtils.SortCardsDescending(ref sortedCards);
     }
 
-    private bool IsStraight(CardElement[] sortedCards) {
+    private bool IsStraight(CardElement[] sortedCards) 
+    {
         return IsNumberOneLevelAbove(sortedCards[0], sortedCards[1]) &&
                IsNumberOneLevelAbove(sortedCards[1], sortedCards[2]) &&
                IsNumberOneLevelAbove(sortedCards[2], sortedCards[3]) &&
                IsNumberOneLevelAbove(sortedCards[3], sortedCards[4]);
     }
-    private bool IsNumberOneLevelAbove(CardElement first, CardElement second) {
+    private bool IsNumberOneLevelAbove(CardElement first, CardElement second) 
+    {
         return (int)first.CardNumber == ((int)second.CardNumber)+1;
     }
 
-    public bool IsFlush(CardElement[] sortedCards) {
+    public bool IsFlush(CardElement[] sortedCards) 
+    {
         return IsSameSuite(sortedCards[0], sortedCards[1]) &&
                IsSameSuite(sortedCards[1], sortedCards[2]) &&
                IsSameSuite(sortedCards[2], sortedCards[3]) &&
                IsSameSuite(sortedCards[3], sortedCards[4]);
     }
 
-    private bool IsSameSuite(CardElement first, CardElement second) {
+    private bool IsSameSuite(CardElement first, CardElement second) 
+    {
         return first.CardSuite == second.CardSuite;
     }
 }
 
-public class FivePairsCardsValidationStrategy: CardsValidationStrategy {
+public class FivePairsCardsValidationStrategy: ICardsValidationStrategy 
+{
     private Dictionary<int, int> numberDict = new Dictionary<int, int>();
-    public CardSetType ValidateType(CardElement[] cards) {
+    public CardSetType ValidateType(CardElement[] cards) 
+    {
         if(cards.Length == 5) {
             PopulateDictionary(cards);
             if(numberDict.Count != 2) {
@@ -108,7 +123,8 @@ public class FivePairsCardsValidationStrategy: CardsValidationStrategy {
         }
     }
 
-    private void PopulateDictionary(CardElement[] cards) {
+    private void PopulateDictionary(CardElement[] cards) 
+    {
         numberDict = new Dictionary<int, int>();
         foreach(CardElement elem in cards) {
             int number = (int)elem.CardNumber;
@@ -119,7 +135,8 @@ public class FivePairsCardsValidationStrategy: CardsValidationStrategy {
             }
         }
     }
-    public bool IsValid(CardElement[] cards) {
+    public bool IsValid(CardElement[] cards) 
+    {
         if(cards.Length == 5) {
             HashSet<int> numbers = new HashSet<int>();
             foreach(CardElement elem in cards) {
@@ -138,7 +155,8 @@ public class FivePairsCardsValidationStrategy: CardsValidationStrategy {
         }
     }
 
-    private bool IsSameSuite(CardElement first, CardElement second) {
+    private bool IsSameSuite(CardElement first, CardElement second) 
+    {
         return first.CardSuite == second.CardSuite;
     }
 }

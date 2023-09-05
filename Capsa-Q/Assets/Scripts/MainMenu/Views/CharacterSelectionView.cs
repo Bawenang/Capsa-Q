@@ -35,7 +35,8 @@ public class CharacterSelectionView : MonoBehaviour
         beginButton.onClick.AddListener(BeginGame);
     }
 
-    public void Populate(CharacterData[] characters) {
+    public void Populate(CharacterData[] characters) 
+    {
         this.characters = characters;
         for(int i = 0; i < charButtons.Length; i++) {
             charButtons[i].Populate(characters[i].GetSprite(SpriteState.Idle), 
@@ -44,7 +45,8 @@ public class CharacterSelectionView : MonoBehaviour
         }
     }
 
-    private void BeginGame() {
+    private void BeginGame() 
+    {
         if(onBeginButton != null) onBeginButton(selectedChar);
     }
 

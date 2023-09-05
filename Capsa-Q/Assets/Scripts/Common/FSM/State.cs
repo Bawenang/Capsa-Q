@@ -9,7 +9,8 @@ namespace FSM
 
         [SerializeField] protected Transition[] transitionList;
 
-        public void OnUpdate() {
+        public void OnUpdate() 
+        {
             DoUpdateAction();
 
             int transitionIndex = CheckTransition();
@@ -19,11 +20,13 @@ namespace FSM
             }
         }
 
-        public void SetEndCallback(EndStateCallback callback) {
+        public void SetEndCallback(EndStateCallback callback) 
+        {
             onEndCallback = callback;
         }
 
-        public void ClearEndCallback() {
+        public void ClearEndCallback() 
+        {
             onEndCallback = null;
         }
 
